@@ -24,7 +24,7 @@ h1, h2 {
   width: 87.5%;
   max-width: 80%;
   height: 87.5%;
-  max-height: 30vh;
+  max-height: 50vh;
   min-width: 15vh;
   object-fit: contain;
   filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.4));
@@ -33,7 +33,7 @@ h1, h2 {
 .project-title {
   text-transform: uppercase;
   color: var(--text-header-c);
-  font-size: max(2.75vh, min(3vw, 5vh));
+  font-size: max(2.25vh, min(3vw, 4.5vh));
   filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.35));
 
 }
@@ -48,4 +48,5 @@ h1, h2 {
 .title-container {
   justify-content: space-between;
 }
+
 </style>

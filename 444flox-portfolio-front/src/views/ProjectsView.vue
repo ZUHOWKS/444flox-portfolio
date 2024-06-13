@@ -18,7 +18,7 @@ import DriveActions from "@/components/DriveActions.vue";
         <ProjectCover class="cover" :cover="SageCover" :title="'sage'" :sub-title="'direction artistique'"></ProjectCover>
         <DriveActions class="drive-actions"></DriveActions>
       </div>
-      <div class="menu column flex-centered">
+      <div class="menu column">
         <div class="queue">
 
         </div>
@@ -113,8 +113,48 @@ import DriveActions from "@/components/DriveActions.vue";
   height: 100%;
 }
 
-@media screen and width:  {
-  
+.menu>.queue {
+  width: 100%;
+  height: 35%;
+  opacity: 0.25;
+
+}
+
+.menu>.playlists {
+  width: 100%;
+  height: 65%;
+
+}
+
+@media screen and (max-width: 850px){
+
+  .box-content {
+    align-items: start;
+  }
+
+  .box-content>.drive {
+    width: 45%;
+    height: min(38vh, 38vw);
+    min-height: 25vh;
+  }
+
+  .box-content>.menu {
+    width: 55%;
+
+  }
+
+  .menu>.playlists {
+    width: 200%;
+    translate: -50%;
+    justify-self: center;
+    height: calc(100% - min(38vh, 38vw));
+  }
+
+  .menu>.queue {
+    height: min(38vh, 38vw);
+    min-height: 25vh;
+
+  }
 }
 
 </style>
