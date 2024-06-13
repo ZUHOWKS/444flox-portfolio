@@ -9,21 +9,10 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+
     {
-        title: 'Sage',
-        coverName: 'sage',
-        author: '444flox',
-        category: 'artistic direction',
-    },
-    {
-        title: 'Gen',
-        coverName: 'gen',
-        author: '444flox',
-        category: 'ui/ux',
-    },
-    {
-        title: 'Fallen hero',
-        coverName: 'fallen_hero',
+        title: 'Excalibur',
+        coverName: 'excalibur',
         author: '444flox',
         category: 'artistic direction',
     },
@@ -34,15 +23,34 @@ export const projects: Project[] = [
         category: 'edition',
     },
     {
+        title: 'Posters',
+        coverName: 'posters',
+        author: '444flox',
+        category: 'visual creation',
+    },
+    {
+        title: 'Gen',
+        coverName: 'gen',
+        author: '444flox',
+        category: 'ui/ux',
+    },
+    {
+        title: 'Sage',
+        coverName: 'sage',
+        author: '444flox',
+        category: 'artistic direction',
+    },
+    {
+        title: 'Fallen hero',
+        coverName: 'fallen_hero',
+        author: '444flox',
+        category: 'artistic direction',
+    },
+    {
         title: 'Dispositifs',
         coverName: 'dispositifs',
         author: '444flox',
         category: 'numeric project',
     },
-    {
-        title: 'Posters',
-        coverName: 'posters',
-        author: '444flox',
-        category: 'visual creation',
-    }
+
 ]
