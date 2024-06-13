@@ -3,6 +3,7 @@
 import ProjectCover from "@/components/drive/ProjectCover.vue";
 import DriveActions from "@/components/drive/DriveActions.vue";
 import WaitingQueue from "@/components/queue/WaitingQueue.vue";
+import Playlist from "@/components/playlist/Playlist.vue";
 
 </script>
 
@@ -15,7 +16,7 @@ import WaitingQueue from "@/components/queue/WaitingQueue.vue";
     </div>
     <div class="box-content row flex-centered">
       <div class="drive column flex-centered">
-        <ProjectCover class="cover" :cover="'sage'" :title="'sage'" :sub-title="'direction artistique'"></ProjectCover>
+        <ProjectCover class="cover" :cover="'sage'" :title="'sage'" :sub-title="'direction artistique'"/>
         <DriveActions class="drive-actions user-unselect-any"></DriveActions>
       </div>
       <div class="menu column">
@@ -23,8 +24,8 @@ import WaitingQueue from "@/components/queue/WaitingQueue.vue";
           <WaitingQueue/>
         </div>
 
-        <div class="playlists">
-
+        <div class="playlists column">
+          <Playlist/>
         </div>
       </div>
 
@@ -51,6 +52,8 @@ import WaitingQueue from "@/components/queue/WaitingQueue.vue";
   min-width: 43vh;
   background: var(--header-c);
   border-radius: 8px;
+
+  overflow: hidden;
 
 }
 
@@ -123,7 +126,7 @@ import WaitingQueue from "@/components/queue/WaitingQueue.vue";
   height: 55%;
 }
 
-@media screen and (max-width: 850px){
+@media screen and (max-width: 860px){
 
   .box-content {
     align-items: start;
@@ -142,10 +145,12 @@ import WaitingQueue from "@/components/queue/WaitingQueue.vue";
   }
 
   .menu>.playlists {
-    width: 182%;
+    width: 176%;
     translate: -45%;
     justify-self: center;
-    height: calc(100% - min(38vh, 38vw));
+    height: calc(100% - min(36vh, 36vw));
+    max-height: 38vh;
+    margin: 0 3.5% 0 3.5%;
   }
 
   .menu>.queue {
