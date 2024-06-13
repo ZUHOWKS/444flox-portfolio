@@ -1,16 +1,17 @@
 <script setup lang="ts">
 
 import QueueCover from "@/components/queue/QueueCover.vue";
-import {ref} from "vue";
+import {type Ref, ref} from "vue";
 import {projects} from "@/modules/utils/projects";
 
 const projectsQueued = ref(projects)
+const listElem: Ref<HTMLElement | null> = ref(null)
 
 </script>
 
 <template>
   <h1>Waiting queue</h1>
-  <div class="list row">
+  <div class="list row" @wheel="(evt) => {evt.preventDefault(); if (listElem) listElem.scrollLeft += evt.deltaY * 2;}" ref="listElem">
     <QueueCover v-for="project of projectsQueued" class="cover column flex-centered" :cover="project.coverName" :title="project.title" :sub-title="project.author"/>
   </div>
 
@@ -26,19 +27,16 @@ const projectsQueued = ref(projects)
 
   .list {
     height: calc(83% - 0.75vw);
-    flex-wrap: nowrap;
     overflow-y: scroll;
-    scroll-behavior: smooth;
-    scrollbar-color: rgba(75,75,75, 0.75) transparent;
-    scrollbar-width: thin;
-    scrollbar-gutter: stable;
+    overflow-x: visible;
+    align-items: start;
   }
 
   .cover {
     margin: 0 1vh;
   }
 
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 860px) {
     h1 {
       font-size: max(2.75vh, 3.5vw);
       margin-top: min(3vh, 5vw);
@@ -50,6 +48,7 @@ const projectsQueued = ref(projects)
 
     .list {
       height: 80%;
+      align-items: center;
     }
 
   }
