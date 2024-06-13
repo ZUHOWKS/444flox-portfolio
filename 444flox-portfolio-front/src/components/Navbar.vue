@@ -50,7 +50,7 @@ nav>a:hover {
   height: 100%;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 850px) {
 
   .logo {
     height: calc(3vw + 1vh);
