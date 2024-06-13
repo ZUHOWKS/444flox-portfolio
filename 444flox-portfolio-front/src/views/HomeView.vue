@@ -5,10 +5,10 @@
 <template>
   <main class="column flex-centered">
     <div class="title column flex-centered">
-      <img class="logo user-unselect-any" src="@/assets/img/logo/444flox-logo-white.svg" alt="logo">
+      <img class="logo user-unselect-any" src="@/assets/img/logo/444flox-logo-white.svg" alt="logo" draggable="false">
       <h2>bienvenue!</h2>
       <div class="pixel-border-container row flex-centered">
-        <img class="pixel-border user-unselect-any" src="@/assets/vec/pixel-border.svg" alt="pixel border">
+        <img class="pixel-border user-unselect-any" src="@/assets/vec/pixel-border.svg" alt="pixel border" draggable="false">
         <div class="pixel-border-content column flex-centered">
           <RouterLink to="/projects">Entrer</RouterLink>
         </div>
