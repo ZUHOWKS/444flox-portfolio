@@ -51,7 +51,7 @@ h1, h2 {
   justify-content: space-between;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 860px) {
 
   .project-listened {
     width: min(22.5vh, 22.5vw);

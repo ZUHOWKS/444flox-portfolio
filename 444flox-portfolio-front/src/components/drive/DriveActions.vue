@@ -26,7 +26,7 @@ div>img {
   filter: drop-shadow(2px 0px 2px rgba(0,0,0, 0.35));
 }
 
-@media screen and (max-width: 850px){
+@media screen and (max-width: 860px){
   div {
     margin: 2.5% 0;
     align-items: end;
