@@ -33,13 +33,13 @@ h1, h2 {
 .project-title {
   text-transform: uppercase;
   color: var(--text-header-c);
-  font-size: max(2.75vh, 2.25vw);
+  font-size: max(2.75vh, min(3vw, 5vh));
   filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.35));
 
 }
 
 .project-type {
-  font-size: max(1.25vh, 1vw);
+  font-size: max(1.25vh, min(1.5vw, 2.5vh));
   color: var(--text-hover-header-c);
   filter: drop-shadow(2px 2px 4px rgba(0,0,0, 0.45));
   line-height: 0;

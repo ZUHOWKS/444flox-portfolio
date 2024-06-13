@@ -43,10 +43,12 @@ import DriveActions from "@/components/DriveActions.vue";
 }
 
 .box {
-  height: calc(50% + 25vw);
-  max-height: 75%;
-  width: 65%;
-  min-width: 42.5vh;
+  max-height: 90%;
+  height: calc(85% - 1vw);
+  min-height: 77.5%;
+  max-width: 100vh;
+  width: calc(95% - 15vw);
+  min-width: 43vh;
   background: var(--header-c);
   border-radius: 8px;
 
@@ -109,6 +111,10 @@ import DriveActions from "@/components/DriveActions.vue";
 .box-content>.menu {
   width: 65%;
   height: 100%;
+}
+
+@media screen and width:  {
+  
 }
 
 </style>
