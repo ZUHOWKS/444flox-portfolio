@@ -2,9 +2,11 @@
 :root {
   --background-c: #000000;
   --text-background-c: #ffffff;
+  --text-hover-background-c: #bfbfbf;
 
   --header-c: #ffffff;
   --text-header-c: #000000;
+  --text-hover-header-c: #5c5c5c;
 }
 
 @font-face {
