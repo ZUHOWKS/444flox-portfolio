@@ -4,12 +4,11 @@ const props = defineProps(['cover', 'title', 'subTitle'])
 
 <template>
   <div class="cover column flex-centered">
-    <img class="project-listen" :src="cover" alt="listened project">
+    <img class="project-listened" :src="'./covers/' + cover + '-cover.png'" alt="listened project cover" draggable="false">
     <div class="title-container column flex-centered">
       <h1 class="project-title">{{ title }}</h1>
       <h2 class="project-type">{{ subTitle }}</h2>
     </div>
-
   </div>
 
 </template>
@@ -20,14 +19,18 @@ h1, h2 {
 
 }
 
-.project-listen {
+.project-listened {
   width: 100%;
   max-width: 80%;
-  height: 87.5%;
-  max-height: 50vh;
-  min-width: 32vh;
+  height: 90%;
+  max-height: 54vh;
+  min-width: 30vh;
   object-fit: contain;
   filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.4));
+}
+
+.title-container {
+  margin: 1% 0;
 }
 
 .project-title {
@@ -35,7 +38,6 @@ h1, h2 {
   color: var(--text-header-c);
   font-size: max(2.25vh, min(3vw, 4.5vh));
   filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.35));
-
 }
 
 .project-type {
@@ -47,6 +49,18 @@ h1, h2 {
 
 .title-container {
   justify-content: space-between;
+}
+
+@media screen and (max-width: 850px) {
+
+  .project-listened {
+    width: min(22.5vh, 22.5vw);
+    height: min(22.5vh, 22.5vw);
+  }
+
+  .title-container {
+    margin: 0% 0;
+  }
 }
 
 </style>

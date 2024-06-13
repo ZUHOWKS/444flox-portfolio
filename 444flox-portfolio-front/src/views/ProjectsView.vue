@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import ProjectCover from "@/components/ProjectCover.vue";
-import SageCover from "@/assets/img/sage-cover.png";
-import DriveActions from "@/components/DriveActions.vue";
+import ProjectCover from "@/components/drive/ProjectCover.vue";
+import DriveActions from "@/components/drive/DriveActions.vue";
+import WaitingQueue from "@/components/queue/WaitingQueue.vue";
 
 </script>
 
@@ -10,17 +10,17 @@ import DriveActions from "@/components/DriveActions.vue";
 <div class="container column flex-centered">
   <div class="box column flex-centered">
     <div class="box-header row">
-      <img class="full-screen-icon" src="@/assets/icons/full-screen.svg" alt="full screen icon">
-      <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo">
+      <img class="full-screen-icon" src="@/assets/icons/full-screen.svg" alt="full screen icon" draggable="false">
+      <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo" draggable="false">
     </div>
     <div class="box-content row flex-centered">
       <div class="drive column flex-centered">
-        <ProjectCover class="cover" :cover="SageCover" :title="'sage'" :sub-title="'direction artistique'"></ProjectCover>
+        <ProjectCover class="cover" :cover="'sage'" :title="'sage'" :sub-title="'direction artistique'"></ProjectCover>
         <DriveActions class="drive-actions"></DriveActions>
       </div>
       <div class="menu column">
         <div class="queue">
-
+          <WaitingQueue/>
         </div>
 
         <div class="playlists">
@@ -115,13 +115,12 @@ import DriveActions from "@/components/DriveActions.vue";
 
 .menu>.queue {
   width: 100%;
-  height: 35%;
+  height: 45%;
 }
 
 .menu>.playlists {
   width: 100%;
-  height: 65%;
-
+  height: 55%;
 }
 
 @media screen and (max-width: 850px){
@@ -134,6 +133,7 @@ import DriveActions from "@/components/DriveActions.vue";
     width: 45%;
     height: min(38vh, 38vw);
     min-height: 25vh;
+    justify-content: center;
   }
 
   .box-content>.menu {
