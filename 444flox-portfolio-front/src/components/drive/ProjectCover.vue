@@ -4,7 +4,7 @@ const props = defineProps(['cover', 'title', 'subTitle'])
 
 <template>
   <div class="cover column flex-centered">
-    <img class="project-listened" :src="'./covers/' + cover + '-cover.png'" alt="listened project cover" draggable="false">
+    <img class="project-listened user-unselect-any" :src="'./covers/' + cover + '-cover.png'" alt="listened project cover" draggable="false">
     <div class="title-container column flex-centered">
       <h1 class="project-title">{{ title }}</h1>
       <h2 class="project-type">{{ subTitle }}</h2>
