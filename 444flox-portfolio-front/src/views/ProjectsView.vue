@@ -16,7 +16,7 @@ import WaitingQueue from "@/components/queue/WaitingQueue.vue";
     <div class="box-content row flex-centered">
       <div class="drive column flex-centered">
         <ProjectCover class="cover" :cover="'sage'" :title="'sage'" :sub-title="'direction artistique'"></ProjectCover>
-        <DriveActions class="drive-actions"></DriveActions>
+        <DriveActions class="drive-actions user-unselect-any"></DriveActions>
       </div>
       <div class="menu column">
         <div class="queue">
