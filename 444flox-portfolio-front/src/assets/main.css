@@ -10,3 +10,10 @@
     height: 100%;
     width: 100%;
 }
+
+.list {
+    scroll-behavior: smooth;
+    scrollbar-color: rgba(75,75,75, 0.75) transparent;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+}
