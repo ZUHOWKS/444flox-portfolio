@@ -1,13 +1,17 @@
 <script setup lang="ts">
 
-import ProjectCover from "@/components/drive/ProjectCover.vue";
-import QueuCover from "@/components/queue/QueueCover.vue";
+import QueueCover from "@/components/queue/QueueCover.vue";
+import {ref} from "vue";
+import {projects} from "@/modules/utils/projects";
+
+const projectsQueued = ref(projects)
+
 </script>
 
 <template>
   <h1>Waiting queue</h1>
   <div class="list row">
-    <QueuCover class="cover column flex-centered" :cover="'sage'" :title="'sage'" :sub-title="'444flox'"/>
+    <QueueCover v-for="project of projectsQueued" class="cover column flex-centered" :cover="project.coverName" :title="project.title" :sub-title="project.author"/>
   </div>
 
 </template>
@@ -31,7 +35,7 @@ import QueuCover from "@/components/queue/QueueCover.vue";
   }
 
   .cover {
-    margin: 0 3vh;
+    margin: 0 1vh;
   }
 
   @media screen and (max-width: 850px) {
