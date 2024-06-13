@@ -1,0 +1,51 @@
+<script setup lang="ts">
+const props = defineProps(['cover', 'title', 'subTitle'])
+</script>
+
+<template>
+  <div class="cover column flex-centered">
+    <img class="project-listen" :src="cover" alt="listened project">
+    <div class="title-container column flex-centered">
+      <h1 class="project-title">{{ title }}</h1>
+      <h2 class="project-type">{{ subTitle }}</h2>
+    </div>
+
+  </div>
+
+</template>
+
+<style scoped>
+h1, h2 {
+  font-family: Modeseven, serif;
+
+}
+
+.project-listen {
+  width: 87.5%;
+  max-width: 80%;
+  height: 87.5%;
+  max-height: 30vh;
+  min-width: 15vh;
+  object-fit: contain;
+  filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.4));
+}
+
+.project-title {
+  text-transform: uppercase;
+  color: var(--text-header-c);
+  font-size: max(2.75vh, 2.25vw);
+  filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.35));
+
+}
+
+.project-type {
+  font-size: max(1.25vh, 1vw);
+  color: var(--text-hover-header-c);
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0, 0.45));
+  line-height: 0;
+}
+
+.title-container {
+  justify-content: space-between;
+}
+</style>
