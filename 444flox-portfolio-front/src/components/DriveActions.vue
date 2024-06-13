@@ -19,9 +19,9 @@ div {
 }
 
 div>img {
-  min-height: 25%;
-  height: calc(1.25vh + 2.75vw);
-  max-height: 50%;
+  min-height: 22.5%;
+  height: calc(1.25vh + 2.5vw);
+  max-height: 40%;
   object-fit: contain;
   filter: drop-shadow(2px 0px 2px rgba(0,0,0, 0.35));
 }

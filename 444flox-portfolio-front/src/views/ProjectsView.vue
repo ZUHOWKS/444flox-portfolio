@@ -92,7 +92,7 @@ import DriveActions from "@/components/DriveActions.vue";
 }
 
 .box-content>.drive {
-  width: 35%;
+  width: 40%;
   min-width: 17.5vh;
   height: 100%;
 
@@ -109,15 +109,13 @@ import DriveActions from "@/components/DriveActions.vue";
 }
 
 .box-content>.menu {
-  width: 65%;
+  width: 60%;
   height: 100%;
 }
 
 .menu>.queue {
   width: 100%;
   height: 35%;
-  opacity: 0.25;
-
 }
 
 .menu>.playlists {
@@ -144,8 +142,8 @@ import DriveActions from "@/components/DriveActions.vue";
   }
 
   .menu>.playlists {
-    width: 200%;
-    translate: -50%;
+    width: 182%;
+    translate: -45%;
     justify-self: center;
     height: calc(100% - min(38vh, 38vw));
   }

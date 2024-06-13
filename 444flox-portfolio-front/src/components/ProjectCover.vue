@@ -21,11 +21,11 @@ h1, h2 {
 }
 
 .project-listen {
-  width: 87.5%;
+  width: 100%;
   max-width: 80%;
   height: 87.5%;
   max-height: 50vh;
-  min-width: 15vh;
+  min-width: 32vh;
   object-fit: contain;
   filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.4));
 }
