@@ -16,6 +16,7 @@ import Navbar from "@/components/Navbar.vue";
 header {
   width: 100vw;
   height: 7.5vh;
+  min-height: calc(25px + 2.5vw);
   background: var(--header-c);
   align-items: center;
 }
