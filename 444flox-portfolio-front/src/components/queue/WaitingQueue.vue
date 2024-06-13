@@ -11,7 +11,7 @@ const listElem: Ref<HTMLElement | null> = ref(null)
 
 <template>
   <h1>Waiting queue</h1>
-  <div class="list row" @wheel="(evt) => {evt.preventDefault(); if (listElem) listElem.scrollLeft += evt.deltaY * 2;}" ref="listElem">
+  <div class="list row" @wheel="(evt) => {evt.preventDefault(); if (listElem) listElem.scrollLeft += (evt.deltaY * 2.5);}" ref="listElem">
     <QueueCover v-for="project of projectsQueued" class="cover column flex-centered" :cover="project.coverName" :title="project.title" :sub-title="project.author"/>
   </div>
 
