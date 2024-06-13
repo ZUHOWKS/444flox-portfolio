@@ -26,5 +26,11 @@ h1 {
   overflow-x: scroll;
 }
 
+@media screen and (max-width: 860px) {
+  h1 {
+    font-size: 2.75vh;
+  }
+}
+
 
 </style>

@@ -28,7 +28,8 @@ div>img {
 
 @media screen and (max-width: 860px){
   div {
-    margin: 2.5% 0;
+    margin-top: 7.5%;
+    margin-bottom: 10%;
     align-items: end;
   }
 

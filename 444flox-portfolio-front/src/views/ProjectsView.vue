@@ -160,4 +160,10 @@ import Playlist from "@/components/playlist/Playlist.vue";
   }
 }
 
+@media screen and (max-width: 655px){
+  .menu>.playlists {
+    max-height: 40.5vh;
+  }
+}
+
 </style>

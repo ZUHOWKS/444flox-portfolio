@@ -16,7 +16,7 @@ const props = defineProps(['cover', 'title', 'subTitle'])
 <style scoped>
 h1, h2 {
   font-family: Modeseven, serif;
-
+  white-space: nowrap;
 }
 
 .project-listened {
@@ -31,6 +31,7 @@ h1, h2 {
 
 .title-container {
   margin: 1% 0;
+  justify-content: space-between;
 }
 
 .project-title {
@@ -47,20 +48,62 @@ h1, h2 {
   line-height: 0;
 }
 
-.title-container {
-  justify-content: space-between;
-}
-
 @media screen and (max-width: 860px) {
 
+  .cover {
+    justify-content: start;
+    margin-top: 5%;
+    margin-bottom: 0.25vw;
+    transform: translateY(7.5%);
+  }
+
   .project-listened {
-    width: min(22.5vh, 22.5vw);
-    height: min(22.5vh, 22.5vw);
+    width: min(24.5vh, 23vw);
+    height: min(24.5vh, 23vw);
   }
 
   .title-container {
-    margin: 0% 0;
+    margin-bottom: 0;
+    margin-top: 1%;
   }
+
+  .project-title {
+    font-size: max(1.75vh, min(3vw, 3.5vh));
+  }
+
+  .project-type {
+    font-size: max(1.1vh, min(1vw, 2vh));
+  }
+
+  .project-title {
+    animation: textSwitch1 4s infinite linear;
+  }
+
+  .project-type {
+    position: absolute;
+    line-height: max(3vh, min(4vw, 3.75vh));
+    animation: textSwitch2 4s infinite linear;
+    font-size: max(1.45vh, min(1.65vw, 2.25vh));
+  }
+
+  @keyframes textSwitch1 {
+    0%, 42.5%, 100% {
+      opacity: 1;
+    }
+    47.5%, 97.5% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes textSwitch2 {
+    0%, 47.5%, 97.5%, 100% {
+      opacity: 0;
+    }
+    50%, 92.5% {
+      opacity: 1;
+    }
+  }
+
 }
 
 </style>

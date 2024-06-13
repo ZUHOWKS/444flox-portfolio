@@ -38,7 +38,7 @@ const listElem: Ref<HTMLElement | null> = ref(null)
 
   @media screen and (max-width: 860px) {
     h1 {
-      font-size: max(2.75vh, 3.5vw);
+      font-size: 2.75vh;
       margin-top: min(3vh, 5vw);
     }
 
