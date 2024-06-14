@@ -91,7 +91,7 @@ function previousProject() {
     <div class="box-content row flex-centered">
       <div class="drive column flex-centered">
         <ProjectCover class="cover" :cover="projectListened.coverName" :title="projectListened.title" :sub-title="projectListened.category"/>
-        <DriveActions class="drive-actions user-unselect-any" :next="nextProject" :previous="previousProject"/>
+        <DriveActions class="drive-actions user-unselect-any" :next="nextProject" :previous="previousProject" :projectListened="projectListened"/>
       </div>
       <div class="menu column">
         <div class="queue">
