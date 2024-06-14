@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
 import QueueCover from "@/components/queue/QueueCover.vue";
-import {type Ref, ref} from "vue";
-import {projects} from "@/modules/utils/projects";
+import {onMounted, type Ref, ref} from "vue";
 
-const projectsQueued = ref(projects)
+const props=defineProps(['select', 'projectsQueued'])
+
 const listElem: Ref<HTMLElement | null> = ref(null)
 
 </script>
@@ -12,7 +12,7 @@ const listElem: Ref<HTMLElement | null> = ref(null)
 <template>
   <h1>Waiting queue</h1>
   <div class="list row" @wheel="(evt) => {evt.preventDefault(); if (listElem) listElem.scrollLeft += (evt.deltaY * 2.5);}" ref="listElem">
-    <QueueCover v-for="project of projectsQueued" class="cover column flex-centered selectable" :cover="project.coverName" :title="project.title" :sub-title="project.author"/>
+    <QueueCover v-for="project of projectsQueued" class="cover column flex-centered selectable" :cover="project.coverName" :title="project.title" :sub-title="project.author" @click="select(project.coverName)"/>
   </div>
 
 </template>

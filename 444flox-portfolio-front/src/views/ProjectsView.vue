@@ -4,6 +4,80 @@ import ProjectCover from "@/components/drive/ProjectCover.vue";
 import DriveActions from "@/components/drive/DriveActions.vue";
 import WaitingQueue from "@/components/queue/WaitingQueue.vue";
 import Playlist from "@/components/playlist/Playlist.vue";
+import {onMounted, onUpdated, type Ref, ref} from "vue";
+import {type Project, projects} from "@/modules/utils/projects";
+
+const projectListened: Ref<Project> = ref(projects[0])
+const projectsQueued = ref(projects.slice())
+
+
+onMounted(() => {
+  const listened: string | null = localStorage.getItem('444flox_listened')
+  if (!listened) localStorage.setItem('444flox_listened', projectListened.value.coverName)
+  else {
+    projects.forEach((_p) => {
+      if (_p.coverName === listened) {
+        projectListened.value = _p;
+        hardRefreshQueue();
+        return;
+      }
+    })
+  }
+})
+
+function selectInQueue(coverName: string) {
+  refreshQueue(coverName)
+}
+
+function hardRefreshQueue() {
+  let listened: string | null = localStorage.getItem('444flox_listened')
+
+  if (!listened) listened = projects[0].coverName
+
+  let i: number = 0;
+  let cont: boolean = true;
+  while (i < projectsQueued.value.length && cont) {
+    if (projectsQueued.value[0].coverName === listened) {
+      cont = false;
+    }
+    projectsQueued.value.push(projectsQueued.value.shift() as Project)
+    i++;
+  }
+}
+
+function refreshQueue(coverName: string) {
+
+  let i: number = 0;
+  let cont: boolean = true;
+
+  while ((i < projectsQueued.value.length)&& cont) {
+
+    if (projectsQueued.value[0].coverName === coverName) {
+      nextProject();
+      cont = false;
+    } else {
+      projectsQueued.value.push(projectsQueued.value.shift() as Project)
+      i++;
+    }
+
+  }
+
+}
+
+function nextProject() {
+  localStorage.setItem('444flox_listened', projectsQueued.value[0].coverName)
+
+  projectListened.value=projectsQueued.value[0];
+  projectsQueued.value.push(projectsQueued.value.shift() as Project)
+}
+
+function previousProject() {
+  localStorage.setItem('444flox_listened', projectsQueued.value[projectsQueued.value.length-2].coverName)
+  projectListened.value=projectsQueued.value[projectsQueued.value.length-2];
+
+  const p = projectsQueued.value.pop() as Project
+  projectsQueued.value = [p].concat(projectsQueued.value)
+}
 
 </script>
 
@@ -16,12 +90,12 @@ import Playlist from "@/components/playlist/Playlist.vue";
     </div>
     <div class="box-content row flex-centered">
       <div class="drive column flex-centered">
-        <ProjectCover class="cover" :cover="'sage'" :title="'sage'" :sub-title="'direction artistique'"/>
-        <DriveActions class="drive-actions user-unselect-any"></DriveActions>
+        <ProjectCover class="cover" :cover="projectListened.coverName" :title="projectListened.title" :sub-title="projectListened.category"/>
+        <DriveActions class="drive-actions user-unselect-any" :next="nextProject" :previous="previousProject"/>
       </div>
       <div class="menu column">
         <div class="queue">
-          <WaitingQueue/>
+          <WaitingQueue :select="selectInQueue" :projects-queued="projectsQueued"/>
         </div>
 
         <div class="playlists column">
