@@ -7,7 +7,27 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-
+    {
+        title: 'Sage',
+        coverName: 'sage',
+        author: '444flox',
+        category: 'artistic direction',
+        description: "“Sage est un projet fictif qui a su développer mon univers " +
+            "graphique en 2024. Il avait pour but de créer la face avant d’une " +
+            "cover, une face arrière, une version physique de l'EP ainsi qu'un " +
+            "poster.”"
+    },
+    {
+        title: 'Fallen Hero',
+        coverName: 'fallen_hero',
+        author: '444flox',
+        category: 'artistic direction',
+        description: "“Fallen Hero est un projet fictif conçu pour un artiste " +
+            "musical émergent. Il fait partie d'une série de projets que j'ai " +
+            "décide de créer autour du thème médiéval. Pour ce projet, j'ai " +
+            "développe une pochette avant, une pochette arrière, un poster, et " +
+            "un CD physique.”"
+    },
     {
         title: 'Excalibur',
         coverName: 'excalibur',
@@ -53,27 +73,6 @@ export const projects: Project[] = [
             "Avec GEN, plongez dans l’univers diversifié du rap et" +
             "découvrez des talents émergents qui correspondent" +
             "parfaitement à vos préférences musicales.”"
-    },
-    {
-        title: 'Sage',
-        coverName: 'sage',
-        author: '444flox',
-        category: 'artistic direction',
-        description: "“Sage est un projet fictif qui a su développer mon univers " +
-            "graphique en 2024. Il avait pour but de créer la face avant d’une " +
-            "cover, une face arrière, une version physique de l'EP ainsi qu'un " +
-            "poster.”"
-    },
-    {
-        title: 'Fallen Hero',
-        coverName: 'fallen_hero',
-        author: '444flox',
-        category: 'artistic direction',
-        description: "“Fallen Hero est un projet fictif conçu pour un artiste " +
-            "musical émergent. Il fait partie d'une série de projets que j'ai " +
-            "décide de créer autour du thème médiéval. Pour ce projet, j'ai " +
-            "développe une pochette avant, une pochette arrière, un poster, et " +
-            "un CD physique.”"
     },
     {
         title: 'Dispositifs',
