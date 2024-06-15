@@ -41,7 +41,7 @@ export const projects: Project[] = [
         category: 'artistic direction',
     },
     {
-        title: 'Fallen hero',
+        title: 'Fallen Hero',
         coverName: 'fallen_hero',
         author: '444flox',
         category: 'artistic direction',
