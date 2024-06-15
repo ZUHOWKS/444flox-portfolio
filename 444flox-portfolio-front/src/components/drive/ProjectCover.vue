@@ -22,9 +22,9 @@ h1, h2 {
 .project-listened {
   width: 100%;
   max-width: 80%;
-  height: 90%;
+  height: 100%;
   max-height: 54vh;
-  min-width: 30vh;
+  min-width: 19vh;
   object-fit: contain;
   filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.4));
 }
@@ -51,15 +51,13 @@ h1, h2 {
 @media screen and (max-width: 860px) {
 
   .cover {
-    justify-content: start;
-    margin-top: 5%;
-    margin-bottom: 0.25vw;
-    transform: translateY(7.5%);
+    justify-content: end;
   }
 
   .project-listened {
-    width: min(24.5vh, 23vw);
-    height: min(24.5vh, 23vw);
+    width: min(26vh, 20vw);
+    height: min(26vh, 20vw);
+    min-height: 14vh;
   }
 
   .title-container {
@@ -103,7 +101,6 @@ h1, h2 {
       opacity: 1;
     }
   }
-
 }
 
 </style>

@@ -16,8 +16,7 @@
 
 <style scoped>
 div {
-  margin: 2.5% 0;
-  height: 100%;
+  height: 20%;
   width: 100%;
   justify-content: space-around;
 }
@@ -25,19 +24,20 @@ div {
 div>img {
   min-height: 22.5%;
   height: calc(1.25vh + 2.5vw);
-  max-height: 40%;
+  max-height: 33%;
   object-fit: contain;
   filter: drop-shadow(2px 0px 2px rgba(0,0,0, 0.35));
 }
 
 @media screen and (max-width: 860px){
   div {
-    margin-top: 7.5%;
-    margin-bottom: 10%;
-    align-items: end;
+    height: 10%;
+    margin-bottom: 7.5%;
+    align-items: center;
   }
 
   div>img {
+    max-height: 70%;
     margin: 2% 0;
   }
 }

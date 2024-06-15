@@ -36,6 +36,12 @@ const listElem: Ref<HTMLElement | null> = ref(null)
     margin: 0 1vh;
   }
 
+  .cover-container {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+
   @media screen and (max-width: 860px) {
     h1 {
       font-size: 2.75vh;

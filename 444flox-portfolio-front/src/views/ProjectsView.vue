@@ -90,7 +90,9 @@ function previousProject() {
     </div>
     <div class="box-content row flex-centered">
       <div class="drive column flex-centered">
-        <ProjectCover class="cover" :cover="projectListened.coverName" :title="projectListened.title" :sub-title="projectListened.category"/>
+        <div class="cover-container row flex-centered">
+          <ProjectCover class="cover" :cover="projectListened.coverName" :title="projectListened.title" :sub-title="projectListened.category"/>
+        </div>
         <DriveActions class="drive-actions user-unselect-any" :next="nextProject" :previous="previousProject" :projectListened="projectListened"/>
       </div>
       <div class="menu column">
@@ -172,12 +174,16 @@ function previousProject() {
   width: 40%;
   min-width: 17.5vh;
   height: 100%;
-
+  justify-content: start;
+  align-items: center;
 }
 
-.drive>.cover {
-  max-height: 65%;
+.drive>.cover-container {
+  max-height: 80%;
   width: 100%;
+  display: flex;
+  margin-top: 10%;
+  margin-bottom: 5%;
 }
 
 .drive>.drive-actions {
@@ -210,12 +216,17 @@ function previousProject() {
     width: 45%;
     height: min(38vh, 38vw);
     min-height: 25vh;
-    justify-content: center;
+    justify-content: space-evenly;
   }
 
   .box-content>.menu {
     width: 55%;
 
+  }
+
+  .drive>.cover-container {
+    margin-top: 4%;
+    margin-bottom: 0;
   }
 
   .menu>.playlists {
