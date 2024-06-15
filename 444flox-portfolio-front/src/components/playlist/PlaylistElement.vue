@@ -24,6 +24,7 @@ a, h2 {
   font-family: Modeseven, serif;
   text-align: left;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .project-cover {

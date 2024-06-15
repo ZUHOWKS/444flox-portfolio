@@ -17,6 +17,7 @@ const props = defineProps(['cover', 'title', 'subTitle'])
 h1, h2 {
   font-family: Modeseven, serif;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .project-listened {
