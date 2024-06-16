@@ -9,6 +9,7 @@ import Gen from "@/views/projects/Gen.vue";
 import Sage from "@/views/projects/Sage.vue";
 import Dispositifs from "@/views/projects/Dispositifs.vue";
 import FallenHero from "@/views/projects/FallenHero.vue";
+import ProjectLayout from "@/views/projects/ProjectLayout.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,40 +29,47 @@ const router = createRouter({
           component: ProjectsView
         },
         {
-          path: '/excalibur',
-          name: 'Excalibur',
-          component: Excalibur
-        },
-        {
-          path: '/cavalry',
-          name: 'Cavalry',
-          component: Cavalry
-        },
-        {
-          path: '/posters',
-          name: 'Posters',
-          component: Posters
-        },
-        {
-          path: '/gen',
-          name: 'Gen',
-          component: Gen
-        },
-        {
-          path: '/sage',
-          name: 'Sage',
-          component: Sage
-        },
-        {
-          path: '/fallen_hero',
-          name: 'Fallen Hero',
-          component: FallenHero
-        },
-        {
-          path: '/dispositifs',
-          name: 'Dispositifs',
-          component: Dispositifs
-        },
+          path: '/:name',
+          name: 'Project View',
+          component: ProjectLayout,
+          children: [
+            {
+              path: '/excalibur',
+              name: 'Excalibur',
+              component: Excalibur
+            },
+            {
+              path: '/cavalry',
+              name: 'Cavalry',
+              component: Cavalry
+            },
+            {
+              path: '/posters',
+              name: 'Posters',
+              component: Posters
+            },
+            {
+              path: '/gen',
+              name: 'Gen',
+              component: Gen
+            },
+            {
+              path: '/sage',
+              name: 'Sage',
+              component: Sage
+            },
+            {
+              path: '/fallen_hero',
+              name: 'Fallen Hero',
+              component: FallenHero
+            },
+            {
+              path: '/dispositifs',
+              name: 'Dispositifs',
+              component: Dispositifs
+            },
+          ]
+        }
       ]
     },
   ]
