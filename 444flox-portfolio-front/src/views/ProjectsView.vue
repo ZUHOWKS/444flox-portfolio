@@ -6,8 +6,10 @@ import WaitingQueue from "@/components/queue/WaitingQueue.vue";
 import Playlist from "@/components/playlist/Playlist.vue";
 import {onMounted, onUpdated, type Ref, ref} from "vue";
 import {type Project, projects} from "@/modules/utils/projects";
+import gsap from 'gsap'
 
 const projectListened: Ref<Project> = ref(projects[0])
+const _projectListened: Ref<Project> = ref(projects[0])
 const projectsQueued = ref(projects.slice())
 
 
@@ -67,12 +69,23 @@ function refreshQueue(coverName: string) {
 function nextProject() {
   localStorage.setItem('444flox_listened', projectsQueued.value[0].coverName)
 
+  gsap.fromTo('#listened-transition-cover', {opacity: 1, visibility: 'visible', x:0 + "%"}, {opacity: 0, x:-100 + "%", duration: 0.35, onComplete: () => {gsap.to('#listened-transition-cover', {visibility: 'hidden', duration: 0})}})
+  gsap.fromTo('#listened-cover', {opacity: 0, x:100 + "%"}, {opacity: 1, x:0 + "%", duration: 0.35});
+  _projectListened.value = projectListened.value;
   projectListened.value=projectsQueued.value[0];
   projectsQueued.value.push(projectsQueued.value.shift() as Project)
+
+
+
 }
 
 function previousProject() {
   localStorage.setItem('444flox_listened', projectsQueued.value[projectsQueued.value.length-2].coverName)
+
+  gsap.fromTo('#listened-transition-cover', {opacity: 1, visibility: 'visible', x:0 + "%"}, {opacity: 0, x:100 + "%", duration: 0.35, onComplete: () => {gsap.to('#listened-transition-cover', {visibility: 'hidden', duration: 0})}})
+  gsap.fromTo('#listened-cover', {opacity: 0, x:-100 + "%"}, {opacity: 1, x:0 + "%", duration: 0.35});
+
+  _projectListened.value = projectListened.value;
   projectListened.value=projectsQueued.value[projectsQueued.value.length-2];
 
   const p = projectsQueued.value.pop() as Project
@@ -91,7 +104,8 @@ function previousProject() {
     <div class="box-content row flex-centered">
       <div class="drive column flex-centered">
         <div class="cover-container row flex-centered">
-          <ProjectCover class="cover" :cover="projectListened.coverName" :title="projectListened.title" :sub-title="projectListened.category"/>
+          <ProjectCover class="cover-transition" id="listened-transition-cover" :cover="_projectListened.coverName" :title="_projectListened.title" :sub-title="_projectListened.category"/>
+          <ProjectCover class="cover" id="listened-cover" :cover="projectListened.coverName" :title="projectListened.title" :sub-title="projectListened.category"/>
         </div>
         <DriveActions class="drive-actions user-unselect-any" :next="nextProject" :previous="previousProject" :projectListened="projectListened"/>
       </div>
@@ -185,6 +199,19 @@ function previousProject() {
   margin-top: 10%;
   margin-bottom: 5%;
 }
+
+.cover-container>.cover-transition {
+  position: absolute;
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+}
+
+.cover-container>.cover {
+  z-index: 1;
+}
+
 
 .drive>.drive-actions {
   max-height: 20%;

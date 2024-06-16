@@ -7,11 +7,21 @@ const props=defineProps(['select', 'projectsQueued'])
 
 const listElem: Ref<HTMLElement | null> = ref(null)
 
+function scrollWheel(evt: any) {
+  evt.preventDefault();
+  if (listElem.value) {
+
+    listElem.value.scrollLeft += ((evt.deltaX + evt.deltaY) * 6);
+
+
+  }
+}
+
 </script>
 
 <template>
   <h1>Waiting queue</h1>
-  <div class="list row" @wheel="(evt) => {evt.preventDefault(); if (listElem) listElem.scrollLeft += (evt.deltaY * 6);}" ref="listElem">
+  <div class="list row" @wheel="(evt) => scrollWheel(evt)" ref="listElem">
     <QueueCover v-for="project of projectsQueued" class="cover column flex-centered selectable" :cover="project.coverName" :title="project.title" :sub-title="project.author" @click="select(project.coverName)"/>
   </div>
 
