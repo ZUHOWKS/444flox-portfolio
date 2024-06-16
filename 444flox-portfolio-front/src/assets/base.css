@@ -24,6 +24,13 @@
   src: url(Modeseven-L3n5.ttf);
 }
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: rgba(75,75,75, 0.5) transparent;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  transition-delay: 0.25s;
+}
 
 *,
 *::before,
