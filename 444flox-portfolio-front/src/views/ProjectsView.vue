@@ -190,14 +190,20 @@ function previousProject() {
   height: 100%;
   justify-content: start;
   align-items: center;
+  z-index: 1;
 }
 
 .drive>.cover-container {
-  max-height: 80%;
-  width: 100%;
+  height: 40vh;
+  width: min(40vh, 40vw);
+  min-width: 25vh;
+  z-index: 0;
   display: flex;
   margin-top: 10%;
-  margin-bottom: 5%;
+}
+
+.drive>.drive-actions {
+  z-index: 1;
 }
 
 .cover-container>.cover-transition {
@@ -209,6 +215,7 @@ function previousProject() {
 }
 
 .cover-container>.cover {
+  position: absolute;
   z-index: 1;
 }
 
@@ -243,7 +250,6 @@ function previousProject() {
     width: 45%;
     height: min(38vh, 38vw);
     min-height: 25vh;
-    justify-content: space-evenly;
   }
 
   .box-content>.menu {
@@ -252,8 +258,11 @@ function previousProject() {
   }
 
   .drive>.cover-container {
+    height: max(30vh, 26vw);
+    max-width: 30vh;
+    width: min(35vh, 35vw);
+    min-width: 15vh;
     margin-top: 4%;
-    margin-bottom: 0;
   }
 
   .menu>.playlists {

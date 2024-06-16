@@ -20,19 +20,23 @@ h1, h2 {
   text-overflow: ellipsis;
 }
 
+.cover {
+  height: 40vh;
+  width: min(37.5vh, 37.5vw);
+  max-width: 40vh;
+  min-width: 25vh;
+}
+
 .project-listened {
   width: 100%;
-  max-width: 80%;
-  height: 100%;
-  max-height: 54vh;
-  min-width: 19vh;
+  height: 80%;
   object-fit: contain;
   filter: drop-shadow(2px 2px 6px rgba(0,0,0, 0.4));
 }
 
 .title-container {
-  margin: 1% 0;
   justify-content: space-between;
+  margin-top: 1%;
 }
 
 .project-title {
@@ -52,37 +56,33 @@ h1, h2 {
 @media screen and (max-width: 860px) {
 
   .cover {
-    justify-content: end;
+    height: max(30vh, 24vw);
+    width: min(25vh, 25vw);
+    max-width: 30vh;
+    min-width: 15vh;
+    justify-content: center;
   }
 
   .project-listened {
-    width: min(26vh, 20vw);
-    height: min(26vh, 20vw);
-    min-height: 14vh;
+    width: 100%;
+    height: min(28vh, 24vw);
+    min-height: 15.5vh;
   }
 
   .title-container {
-    margin-bottom: 0;
-    margin-top: 1%;
+    margin-bottom: min(0.25vw, 0.1vh);
   }
 
   .project-title {
     font-size: max(1.75vh, min(3vw, 3.5vh));
-  }
-
-  .project-type {
-    font-size: max(1.1vh, min(1vw, 2vh));
-  }
-
-  .project-title {
     animation: textSwitch1 4s infinite linear;
   }
 
   .project-type {
     position: absolute;
-    line-height: max(3vh, min(4vw, 3.75vh));
+    line-height: max(2.65vh, min(3.85vw, 4vh));
     animation: textSwitch2 4s infinite linear;
-    font-size: max(1.45vh, min(1.65vw, 2.25vh));
+    font-size: max(1.5vh, min(2.1vw, 2.35vh));
   }
 
   @keyframes textSwitch1 {
