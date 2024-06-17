@@ -4,7 +4,7 @@
 
 <template>
   <div class="content row">
-    <img class="project-cover user-unselect-any" :src="'./covers/' + cover + '-cover.png'" alt="queued project cover" draggable="false">
+    <img class="project-cover user-unselect-any" :src="'./covers/' + cover + '-cover.png'" alt="queued project cover" draggable="false" rel="preload">
     <div class="title-container column">
       <RouterLink :to="'/' + cover.toString().toLocaleLowerCase()" class="project-title" ref="titleElem">{{ title }}</RouterLink>
       <h2 class="project-type" ref="subTitleElem">{{ subTitle }}</h2>

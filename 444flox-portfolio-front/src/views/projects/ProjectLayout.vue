@@ -32,7 +32,7 @@ const project: Ref<Project> = ref(projects[projectId])
     <div class="blog-content row">
       <div class="side-content">
         <div class="arrow-scroll-move column">
-          <img class="arrow-icon selectable" src="@/assets/icons/arrow.svg" alt="arrow scroll">
+          <img class="arrow-icon selectable" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload">
           <p class="arrow-text">Back</p>
         </div>
       </div>
@@ -56,6 +56,10 @@ const project: Ref<Project> = ref(projects[projectId])
     min-height: 45vh;
     width: 100vw;
     padding-top: 4%;
+  }
+
+  .container> .blog-content, .project-header {
+    position: relative;
   }
 
   .blog-content>.side-content, .project-header>.rank {

@@ -7,7 +7,7 @@ const props = defineProps(['cover', 'title', 'subTitle'])
 
 <template>
   <div class="cover column">
-    <img class="project-in-queue user-unselect-any" :src="'./covers/' + cover + '-cover.png'" alt="queued project cover" draggable="false">
+    <img class="project-in-queue user-unselect-any" :src="'./covers/' + cover + '-cover.png'" alt="queued project cover" draggable="false" rel="preload">
     <div class="title-container column flex-centered">
       <div class="project-title"><span :class="['h1', title.length > 10 ? 'defile' : '']">{{ title }}</span></div>
       <div class="project-type"><span :class="['h2', subTitle.length > 10 ? 'defile' : '']">{{ subTitle }}</span></div>

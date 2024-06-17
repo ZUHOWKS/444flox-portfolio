@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <RouterLink to="/" class="logo"><img src="@/assets/img/logo/444flox-logo-black.svg" alt="444flox logo" draggable="false"></RouterLink>
+  <RouterLink to="/" class="logo"><img src="@/assets/img/logo/444flox-logo-black.svg" alt="444flox logo" draggable="false" rel="preload"></RouterLink>
   <nav class="row flex-centered">
     <RouterLink to="/projects" id="home">home</RouterLink>
     <RouterLink to="/projects" id="shop">shop</RouterLink>

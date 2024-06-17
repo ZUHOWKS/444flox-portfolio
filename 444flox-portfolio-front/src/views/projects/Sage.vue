@@ -38,7 +38,7 @@ import {onMounted, onUpdated} from "vue";
         start: 'center center',
         pin: true,
         scrub: true,
-        end: () => "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4 + "px",
+        end: () => "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4.5 + "px",
         snap: {
           snapTo: 'labels',
           ease: 'none',
@@ -95,10 +95,10 @@ import {onMounted, onUpdated} from "vue";
 
         .addLabel('end')
         .to('.gallery', {x: "-150%"}, 'nextSection')
-        .to('.grid-gallery', {y: "-50%"}, 'nextSection')
+        .to('.grid-gallery', {y: "-25%"}, 'nextSection')
         .set('.arrow-scroll-move', {y: "+=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.5 + "px"})
         .addLabel('end', ">+=0.1")
-        .to('.arrow-scroll-move', {y: "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4 + "px"})
+        .to('.arrow-scroll-move', {y: "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4.5 + "px"})
 
 
 
@@ -107,24 +107,24 @@ import {onMounted, onUpdated} from "vue";
 
 <template>
     <section class="banner row flex-centered">
-      <img class="cover-illustration" id="cover-illustration-1" src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1">
-      <img class="cover-illustration" id="cover-illustration-2" src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2">
+      <img class="cover-illustration" id="cover-illustration-1" src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
+      <img class="cover-illustration" id="cover-illustration-2" src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
     </section>
     <section class="gallery row flex-centered">
-      <img id="cover-post-3" class="gallery-img" src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2">
-      <img id="cover-post-1" class="gallery-img" src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1">
-      <img id="cover-post-2" class="gallery-img" src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2">
+      <img id="cover-post-3" class="gallery-img" src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload">
+      <img id="cover-post-1" class="gallery-img" src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload">
+      <img id="cover-post-2" class="gallery-img" src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload">
       <div class="covers row">
-        <img id="cover-front" class="cover" src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2">
-        <img id="cover-back" class="cover" src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2">
+        <img id="cover-front" class="cover" src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload">
+        <img id="cover-back" class="cover" src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
       </div>
     </section>
     <section class="grid-gallery row">
-      <img src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2">
-      <img src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2">
-      <img src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1">
-      <img src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2">
-      <img src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2">
+      <img src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload">
+      <img src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload">
     </section>
 
 
@@ -137,6 +137,7 @@ img {
 }
 
 .banner {
+  position: relative;
   height: 100%;
   width: max(90vh, 80vw);
   z-index: 1;
@@ -146,11 +147,8 @@ img {
   width: max(52.5vh, 40vw);
 }
 
-.gallery, .covers {
-
-}
-
 .gallery {
+  position: relative;
   height: 90vh;
   width: 90vw;
   transform: translateY(max(-70vh, -80vw)) translateX(-5%);

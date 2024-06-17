@@ -8,9 +8,9 @@
 
 <template>
   <div class="drive-actions row flex-centered">
-    <img class="selectable" src="../../assets/icons/previous.svg" alt="previous icon" draggable="false" @click="previous">
+    <img class="selectable" src="../../assets/icons/previous.svg" alt="previous icon" draggable="false" @click="previous" rel="preload">
   <img class="selectable" src="../../assets/icons/play.svg" alt="play icon" draggable="false" @click="router.push('/' + projectListened.coverName)">
-    <img class="selectable" src="../../assets/icons/next.svg" alt="next icon" draggable="false" @click="next">
+    <img class="selectable" src="../../assets/icons/next.svg" alt="next icon" draggable="false" @click="next" rel="preload">
   </div>
 </template>
 

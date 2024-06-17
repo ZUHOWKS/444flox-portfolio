@@ -98,8 +98,8 @@ function previousProject() {
 <div class="container column flex-centered">
   <div class="box column flex-centered">
     <div class="box-header row">
-      <img class="full-screen-icon" src="@/assets/icons/full-screen.svg" alt="full screen icon" draggable="false">
-      <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo" draggable="false">
+      <img class="full-screen-icon" src="@/assets/icons/full-screen.svg" alt="full screen icon" draggable="false" rel="preload">
+      <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo" draggable="false" rel="preload">
     </div>
     <div class="box-content row flex-centered">
       <div class="drive column flex-centered">
