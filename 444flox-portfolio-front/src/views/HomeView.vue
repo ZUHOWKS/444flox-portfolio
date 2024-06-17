@@ -16,8 +16,8 @@
     </div>
     <div class="desc">
       <p>Bienvenue sur mon portfolio. Pour visiter mes projets, veuillez cliquer/démarrer un morceau. Bonne visite !
-        <br>
-       Dev: Joris VILARDELL - Web Desgin: 444flox
+        <br><br>
+        Dev: <a href="https://zuhowks.github.io/">Joris VILARDELL</a> - Web Desgin: 444flox
       </p>
     </div>
   </main>
@@ -69,11 +69,15 @@ main {
   width: max(40vh, 45vw);
 }
 
-.desc>p {
+.desc> p, a {
   font-family: VT323, serif;
   text-align: center;
   font-size: max(3vh, 2.5vw);
   line-height: max(3vh, 2.5vw);
+}
+
+.desc a:hover {
+  text-decoration: underline;
 }
 
 @keyframes arcade-animation-start {
