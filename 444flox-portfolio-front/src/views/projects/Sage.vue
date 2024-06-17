@@ -123,31 +123,24 @@ import {onMounted, ref} from "vue";
         <img id="cover-back" class="cover" src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
       </div>
     </section>
-    <section class="grid-gallery row">
-      <div class="row">
-        <img src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
-        <img src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
-      </div>
+  </div>
+  <section class="grid-gallery column">
+    <div class="list row">
+      <img src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
+      <img src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
+    </div>
+    <div class="list row row-gallery">
       <img src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload">
       <img src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
+    </div>
+    <div class="list row row-gallery">
       <img src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload">
       <img src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload">
+    </div>
+    <div class="list row">
       <img src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload">
-    </section>
-  </div>
-  <div v-else>
-    <section class="grid-gallery-phone row">
-      <div class="row">
-        <img src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
-        <img src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
-      </div>
-      <img src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload">
-      <img src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
-      <img src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload">
-      <img src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload">
-      <img src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload">
-    </section>
-  </div>
+    </div>
+  </section>
 
 
 </template>
@@ -200,18 +193,30 @@ img {
   width: max(55vh, 40vw);
 }
 
-.grid-gallery, .grid-gallery-phone {
-  flex-wrap: wrap;
-  align-items: center;
+.grid-gallery {
+  align-items: start;
   justify-content: center;
 }
 
-.grid-gallery>img, .grid-gallery-phone>img {
-  margin: 1% 1%;
+.grid-gallery>div {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin-bottom: 1%;
 }
 
-.grid-gallery>img:nth-last-child(1), .grid-gallery-phone>img:nth-last-child(1) {
-  width: 70%;
+.grid-gallery>div>img {
+  height: calc(70vh);
+}
+
+.grid-gallery>.row-gallery>img {
+  margin-right: 1%;
+}
+
+@media screen and (max-width: 750px){
+  .grid-gallery>div>img {
+    height: calc(30vh + 15vw);
+  }
 }
 
 </style>

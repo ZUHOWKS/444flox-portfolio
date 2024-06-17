@@ -57,9 +57,10 @@ function scrollTop() {
   }
 
   .container>.project-header {
-    height: 45vh;
+    height: 100%;
     width: 100vw;
     padding-top: 4%;
+    padding-bottom: 12%;
   }
 
   .container> .blog-content, .project-header {
@@ -140,5 +141,54 @@ function scrollTop() {
 
   .arrow-scroll-move>.arrow-text {
     text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 750px){
+    .title-desc>.desc {
+      width: 85%;
+    }
+
+    .project-header h1 {
+      font-size: min(15vh, 15vw);
+      line-height: min(13vh, 13vw);
+    }
+
+    .project-header>.title-desc {
+      width: 80%;
+    }
+
+    .project-header>.rank, .blog-content>.side-content {
+      width: 22.5%;
+    }
+
+    .blog-content>.side-content {
+      margin: 0 1%;
+      margin-right: 2%;
+    }
+
+    .blog-content>.main-content {
+      width: 80vw;
+    }
+
+
+    .project-header p {
+      font-size: min(4vh, 4vw);
+      line-height: min(4vh, 4vw);
+    }
+
+    .project-header .desc {
+      font-size: min(6vh, 6vw);
+      line-height: min(6vh, 6vw);
+    }
+
+    .arrow-scroll-move>.arrow-icon {
+      height: 100%;
+      width: 100%;
+    }
+
+    .arrow-scroll-move>.arrow-text {
+      font-size: min(4vh, 4vw);
+    }
+
   }
 </style>
