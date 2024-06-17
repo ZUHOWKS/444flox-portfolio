@@ -21,7 +21,9 @@ import {onMounted, ref} from "vue";
     else phone.value = true
 
 
-    addEventListener('resize', () => window.location.reload())
+    addEventListener('resize', () => {
+      if (window.innerWidth <= 1020) phone.value = true
+    })
   })
 
   function initScrollTrigger() {
@@ -44,12 +46,19 @@ import {onMounted, ref} from "vue";
         start: 'center center',
         pin: true,
         scrub: true,
-        end: () => "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4.5 + "px",
+        end: () => "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 3.5 + "px",
         snap: {
           snapTo: 'labels',
           ease: 'none',
-          duration: 99999999,
-        }
+          duration: {min:0.2, max:100},
+        },
+        onLeave: () => {
+          const gridGallery = (document.querySelector('.grid-gallery') as HTMLElement)
+          window.scroll({
+            top: gridGallery.offsetHeight * 0.15 + gridGallery.offsetTop,
+            behavior: 'smooth'
+          });
+        },
       }
     })
 
@@ -59,8 +68,8 @@ import {onMounted, ref} from "vue";
         .from('#cover-back', {x: '15%', y: "130%", rotate: 23}, "cover-move-0")
 
         .addLabel('start', '<=-0.4')
-        .to('#cover-front', {y: "0"}, "cover-move-0")
-        .to('#cover-back', {y: "0"}, "cover-move-0")
+        .to('#cover-front', {y: "0", duration: 1}, "cover-move-0")
+        .to('#cover-back', {y: "0", duration: 1}, "cover-move-0")
 
         .addLabel('start', '>+=0.1')
         .from('#cover-front', {x: "0"}, "cover-move-1")
@@ -68,15 +77,16 @@ import {onMounted, ref} from "vue";
         .from('.covers', {zIndex: 1})
 
         .addLabel('coverMove')
-        .to('#cover-front', {x: "-55%", scale: 0.9}, "cover-move-1")
-        .to('#cover-back', {x: "55%",  scale: 0.9}, "cover-move-1")
+        .to('#cover-front', {x: "-55%", scale: 0.95, duration: 1}, "cover-move-1")
+        .to('#cover-back', {x: "55%",  scale: 0.95, duration: 1}, "cover-move-1")
         .to('.covers', {zIndex: -1})
-        .from('#cover-front', {x: "-55%", scale: 0.9}, "cover-move-2")
-        .from('#cover-back', {x: "55%", scale: 0.9}, "cover-move-2")
+        .from('#cover-front', {x: "-55%", scale: 0.95}, "cover-move-2")
+        .from('#cover-back', {x: "55%", scale: 0.95}, "cover-move-2")
 
         .addLabel('coverMove', '>')
-        .to('#cover-front', {x: "75%", scale: 0.5}, "cover-move-2")
-        .to('#cover-back', {x: "-75%", scale: 0.5}, "cover-move-2")
+        .to('#cover-front', {x: "55%", scale: 0.9, duration: 1}, "cover-move-2")
+        .to('#cover-back', {x: "-55%", scale: 0.9, duration: 1}, "cover-move-2")
+        .to('.covers', {opacity: 0, delay: 0.75, duration: 0.25}, "cover-move-2")
 
 
         .addLabel('firstAppear', '<-=0.1')
@@ -87,26 +97,22 @@ import {onMounted, ref} from "vue";
 
         .addLabel('firstAppear')
         .to('.covers', {visibility: 'hidden'})
-        .to('#cover-post-1', {rotate: -5, duration: 0.25})
+        .to('#cover-post-1', {rotate: -5})
 
         .addLabel('secondAppear', '<-=0.1')
         .from('#cover-post-2', {visibility: 'hidden', rotate: 4})
 
         .addLabel('secondAppear')
-        .to('#cover-post-2', {rotate: 4, duration: 0.25})
-        .to('.gallery-img', {position: 'relative'})
-        .set('.arrow-scroll-move', {position: 'fixed', y: window.innerHeight + "px"})
+        .to('#cover-post-2', {rotate: 4})
+        .to('.gallery-img', {position: 'relative', delay: 0.4})
+        .set('.arrow-scroll-move', {position: 'fixed', y: "600%"})
         .from('.arrow-icon', {rotate: 0})
         .addLabel('end', '<-=0.5')
         .to('.gallery', {x: "-100%"})
         .addLabel('end')
-        .to('.gallery', {x: "-150%"}, 'arrowAnimation')
-        .to('.arrow-icon', {rotate: 90}, 'arrowAnimation')
-        .to('.arrow-scroll-move', {y: "-700%", delay: 0.025}, 'arrowAnimation')
-        .to('.grid-gallery', {y: "-45%", x: 0}, 'arrowAnimation')
-
-
-
+        .to('.gallery', {x: "-150%", duration: 0.6}, 'arrowAnimation')
+        .to('.arrow-scroll-move', {y: "-690%", delay: 0.3, duration: 0.3}, 'arrowAnimation')
+        .to('.arrow-icon', {rotate: 90, delay: 0.3, duration: 0.3}, 'arrowAnimation')
 
 
 
