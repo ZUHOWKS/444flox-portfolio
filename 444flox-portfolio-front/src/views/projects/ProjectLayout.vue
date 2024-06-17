@@ -14,13 +14,6 @@ function scrollTop() {
   window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})
 }
 
-onMounted(() => {
-  document.querySelector('.arrow-scroll-move').addEventListener('click', (e) => {
-    e.preventDefault();
-    scrollTop();
-  })
-})
-
 
 </script>
 
