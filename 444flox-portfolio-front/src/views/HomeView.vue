@@ -67,8 +67,10 @@ main {
 }
 
 .desc>p {
+  font-family: VT323, serif;
   text-align: center;
-  font-size: max(2vh, 1.5vw);
+  font-size: max(3vh, 2.5vw);
+  line-height: max(3vh, 2.5vw);
 }
 
 @keyframes arcade-animation-start {

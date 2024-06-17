@@ -24,6 +24,11 @@
   src: url(Modeseven-L3n5.ttf);
 }
 
+@font-face {
+  font-family: VT323;
+  src: url(VT323-Regular.ttf);
+}
+
 html {
   scroll-behavior: smooth;
   scrollbar-color: rgba(75,75,75, 0.5) transparent;
@@ -56,6 +61,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-background-c);
+  overflow-x: hidden;
 }
 
 
