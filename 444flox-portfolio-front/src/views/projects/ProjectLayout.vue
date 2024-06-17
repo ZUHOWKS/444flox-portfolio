@@ -10,6 +10,10 @@ const projectId: number = getProjectIndex(route.path.split('/')[1])
 const rank: Ref<string> = ref(((projectId + 1) < 10 ? '0' : '') + (projectId + 1))
 const project: Ref<Project> = ref(projects[projectId])
 
+function scrollTop() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})
+}
+
 
 </script>
 
@@ -32,7 +36,7 @@ const project: Ref<Project> = ref(projects[projectId])
     <div class="blog-content row">
       <div class="side-content">
         <div class="arrow-scroll-move column">
-          <img class="arrow-icon selectable" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload">
+          <img class="arrow-icon selectable" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" @click="scrollTop()">
           <p class="arrow-text">Back</p>
         </div>
       </div>
@@ -53,7 +57,7 @@ const project: Ref<Project> = ref(projects[projectId])
   }
 
   .container>.project-header {
-    min-height: 45vh;
+    height: 45vh;
     width: 100vw;
     padding-top: 4%;
   }
