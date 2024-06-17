@@ -190,12 +190,12 @@ onMounted(() => {
     }
 
     .arrow-scroll-move>.arrow-icon {
-      height: 100%;
-      width: 100%;
+      height: 70%;
+      width: 70%;
     }
 
     .arrow-scroll-move>.arrow-text {
-      font-size: min(4vh, 4vw);
+      font-size: min(3.5vh, 3.5vw);
     }
 
   }
