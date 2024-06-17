@@ -32,7 +32,7 @@ const project: Ref<Project> = ref(projects[projectId])
     <div class="blog-content row">
       <div class="side-content">
         <div class="arrow-scroll-move column">
-          <img class="arrow-icon" src="@/assets/icons/arrow.svg" alt="arrow scroll">
+          <img class="arrow-icon selectable" src="@/assets/icons/arrow.svg" alt="arrow scroll">
           <p class="arrow-text">Back</p>
         </div>
       </div>
@@ -55,7 +55,6 @@ const project: Ref<Project> = ref(projects[projectId])
   .container>.project-header {
     min-height: 45vh;
     width: 100vw;
-
     padding-top: 4%;
   }
 
@@ -72,6 +71,7 @@ const project: Ref<Project> = ref(projects[projectId])
 
   .container>.blog-content {
     width: 100vw;
+    max-width: 100vw;
     min-height: 100vh;
   }
 
@@ -87,14 +87,17 @@ const project: Ref<Project> = ref(projects[projectId])
     width: 12.5%;
   }
 
-  .project-header> .desc, p {
+  .project-header p {
     font-size: min(2vh, 2vw);
     line-height: min(2vh, 2vw);
   }
 
   .project-header .desc {
-    font-family: Modeseven, serif;
+    font-family: VT323, serif;
+    font-weight: 400;
     text-align: justify;
+    font-size: min(3vh, 3vw);
+    line-height: min(3vh, 3vw);
   }
 
   .title-desc>.desc {
@@ -109,14 +112,17 @@ const project: Ref<Project> = ref(projects[projectId])
   .blog-content>.side-content {
     min-height: 100vh;
     width: 10%;
+    max-width: 10vw;
   }
 
   .blog-content>.main-content {
+    max-width: 90vw;
     min-height: 100vh;
   }
 
   .arrow-scroll-move {
     justify-content: center;
+    width: 100%;
   }
 
   .arrow-scroll-move>.arrow-icon {
