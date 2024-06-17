@@ -15,7 +15,10 @@
       </div>
     </div>
     <div class="desc">
-      <p>Bienvenue sur mon portfolio. Pour visiter mes projets, veuillez démarrer un morceau pour accéder à l'un d'entre eux.</p>
+      <p>Bienvenue sur mon portfolio. Pour visiter mes projets, veuillez cliquer/démarrer un morceau. Bonne visite !
+        <br>
+       Dev: Joris VILARDELL - Web Desgin: 444flox
+      </p>
     </div>
   </main>
 </template>
