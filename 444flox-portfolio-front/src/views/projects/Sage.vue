@@ -98,14 +98,12 @@ import {onMounted, ref} from "vue";
         .to('.gallery-img', {position: 'relative'})
         .addLabel('end')
         .to('.gallery', {x: "-150%"}, 'nextSection')
-        .to('.grid-gallery', {y: "-50%"}, 'nextSection')
+        .to('.grid-gallery', {y: "-50%", x: 0}, 'nextSection')
         .set('.arrow-scroll-move', {y: "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4.5 + "px"})
         .from('.arrow-icon', {rotate: 0, duration: 0.5})
         .addLabel('end', ">+=0.05")
-        .to('.arrow-scroll-move', {y: "+=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.275 + "px" })
+        .to('.arrow-scroll-move', {y: "+=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.275 + "px", position: 'a'})
         .to('.arrow-icon', {rotate: 90, duration: 0.5})
-
-
 
   }
 </script>
