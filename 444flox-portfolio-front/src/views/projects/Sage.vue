@@ -1,27 +1,32 @@
 <script setup lang="ts">
-import {onMounted, onUpdated} from "vue";
+import {onMounted, ref} from "vue";
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+  const phone = ref(false)
+
   onMounted(() => {
-    if (window.innerWidth > window.innerHeight) {
-      initScrollTrigger();
+    if (window.innerWidth > 1020) {
+      if (localStorage.getItem('444flox-reloaded')) {
+        // The page was just reloaded. Clear the value from local storage
+        // so that it will reload the next time this page is visited.
+        localStorage.removeItem('444flox-reloaded');
+        initScrollTrigger()
+      } else {
+        // Set a flag so that we know not to reload the page twice.
+        localStorage.setItem('444flox-reloaded', '1');
+        location.reload();
+      }
     }
+    else phone.value = true
 
-  })
 
-  onUpdated(() => {
-    if (window.innerWidth > window.innerHeight) {
-      initScrollTrigger();
-    }
+    addEventListener('resize', () => window.location.reload())
   })
 
   function initScrollTrigger() {
     gsap.registerPlugin(ScrollTrigger)
-    let sections = gsap.utils.toArray(".banner")
-    gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
-      x: () => -(document.querySelector('.banner') as HTMLElement).offsetWidth * 1.2 ,
+    gsap.to(".banner", {
       ease: "none",
       scrollTrigger: {
         trigger: '.banner',
@@ -29,7 +34,8 @@ import {onMounted, onUpdated} from "vue";
         pin: true,
         scrub: 0.1,
         end: () => "+=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.2 + "px"
-      }
+      },
+      x: "-=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.2 + "px",
     })
 
     const galleryAnimation = gsap.timeline({
@@ -62,15 +68,15 @@ import {onMounted, onUpdated} from "vue";
         .from('.covers', {zIndex: 1})
 
         .addLabel('coverMove')
-        .to('#cover-front', {x: "-55%"}, "cover-move-1")
-        .to('#cover-back', {x: "55%"}, "cover-move-1")
+        .to('#cover-front', {x: "-55%", scale: 0.9}, "cover-move-1")
+        .to('#cover-back', {x: "55%",  scale: 0.9}, "cover-move-1")
         .to('.covers', {zIndex: -1})
-        .from('#cover-front', {x: "-55%"}, "cover-move-2")
-        .from('#cover-back', {x: "55%"}, "cover-move-2")
+        .from('#cover-front', {x: "-55%", scale: 0.9}, "cover-move-2")
+        .from('#cover-back', {x: "55%", scale: 0.9}, "cover-move-2")
 
         .addLabel('coverMove', '>')
-        .to('#cover-front', {x: "75%", duration: 0.5}, "cover-move-2")
-        .to('#cover-back', {x: "-75%", duration: 0.5}, "cover-move-2")
+        .to('#cover-front', {x: "75%", scale: 0.5}, "cover-move-2")
+        .to('#cover-back', {x: "-75%", scale: 0.5}, "cover-move-2")
 
 
         .addLabel('firstAppear', '<-=0.1')
@@ -89,16 +95,15 @@ import {onMounted, onUpdated} from "vue";
 
         .addLabel('secondAppear')
         .to('#cover-post-2', {rotate: 4, duration: 0.25})
-        .addLabel('secondAppear', '>+=0.25')
-        .to('.gallery-img', {position: 'relative'}, 'nextSection')
-        .from('.grid-gallery', {y: "-50%", x: "150%"}, 'nextSection')
-
+        .to('.gallery-img', {position: 'relative'})
         .addLabel('end')
         .to('.gallery', {x: "-150%"}, 'nextSection')
-        .to('.grid-gallery', {y: "-25%"}, 'nextSection')
-        .set('.arrow-scroll-move', {y: "+=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.5 + "px"})
-        .addLabel('end', ">+=0.1")
-        .to('.arrow-scroll-move', {y: "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4.5 + "px"})
+        .to('.grid-gallery', {y: "-50%"}, 'nextSection')
+        .set('.arrow-scroll-move', {y: "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4.5 + "px"})
+        .from('.arrow-icon', {rotate: 0, duration: 0.5})
+        .addLabel('end', ">+=0.05")
+        .to('.arrow-scroll-move', {y: "+=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.275 + "px" })
+        .to('.arrow-icon', {rotate: 90, duration: 0.5})
 
 
 
@@ -106,6 +111,7 @@ import {onMounted, onUpdated} from "vue";
 </script>
 
 <template>
+  <div v-if="!phone">
     <section class="banner row flex-centered">
       <img class="cover-illustration" id="cover-illustration-1" src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
       <img class="cover-illustration" id="cover-illustration-2" src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
@@ -120,12 +126,30 @@ import {onMounted, onUpdated} from "vue";
       </div>
     </section>
     <section class="grid-gallery row">
+      <div class="row">
+        <img src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
+        <img src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
+      </div>
       <img src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload">
       <img src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
       <img src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload">
       <img src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload">
       <img src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload">
     </section>
+  </div>
+  <div v-else>
+    <section class="grid-gallery-phone row">
+      <div class="row">
+        <img src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
+        <img src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
+      </div>
+      <img src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload">
+      <img src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload">
+    </section>
+  </div>
 
 
 </template>
@@ -139,12 +163,13 @@ img {
 .banner {
   position: relative;
   height: 100%;
-  width: max(90vh, 80vw);
+  width: max(100vh, 90vw);
   z-index: 1;
 }
 
 .banner>img {
-  width: max(52.5vh, 40vw);
+  position: relative;
+  width: max(50vh, 40vw);
 }
 
 .gallery {
@@ -173,16 +198,21 @@ img {
   z-index: -1;
 }
 
-.grid-gallery {
+.covers>img {
+  width: max(55vh, 40vw);
+}
+
+.grid-gallery, .grid-gallery-phone {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
 
-.grid-gallery>img {
+.grid-gallery>img, .grid-gallery-phone>img {
   margin: 1% 1%;
 }
-.grid-gallery>img:nth-last-child(1) {
+
+.grid-gallery>img:nth-last-child(1), .grid-gallery-phone>img:nth-last-child(1) {
   width: 70%;
 }
 
