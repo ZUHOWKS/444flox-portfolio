@@ -80,7 +80,6 @@ import {onMounted, ref} from "vue";
 
 
         .addLabel('firstAppear', '<-=0.1')
-
         .from('#cover-post-1', {visibility: 'hidden', rotate: -5})
 
         .addLabel('firstAppear', '<')
@@ -96,14 +95,22 @@ import {onMounted, ref} from "vue";
         .addLabel('secondAppear')
         .to('#cover-post-2', {rotate: 4, duration: 0.25})
         .to('.gallery-img', {position: 'relative'})
+        .set('.arrow-scroll-move', {position: 'fixed', y: window.innerHeight + "px"})
+        .from('.arrow-icon', {rotate: 0})
+        .addLabel('end', '<-=0.5')
+        .to('.gallery', {x: "-100%"})
         .addLabel('end')
-        .to('.gallery', {x: "-150%"}, 'nextSection')
-        .to('.grid-gallery', {y: "-45%", x: 0}, 'nextSection')
-        .set('.arrow-scroll-move', {y: "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 4.5 + "px"})
-        .from('.arrow-icon', {rotate: 0, duration: 0.5})
-        .addLabel('end', ">+=0.05")
-        .to('.arrow-scroll-move', {y: "+=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.27 + "px", position: 'a'})
-        .to('.arrow-icon', {rotate: 90, duration: 0.5})
+        .to('.gallery', {x: "-150%"}, 'arrowAnimation')
+        .to('.arrow-icon', {rotate: 90}, 'arrowAnimation')
+        .to('.arrow-scroll-move', {y: "-700%", delay: 0.025}, 'arrowAnimation')
+        .to('.grid-gallery', {y: "-45%", x: 0}, 'arrowAnimation')
+
+
+
+
+
+
+
 
   }
 </script>

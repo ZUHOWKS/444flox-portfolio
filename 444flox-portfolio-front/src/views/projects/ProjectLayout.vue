@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {type Ref, ref} from "vue";
+import {onMounted, type Ref, ref} from "vue";
 import {useRoute} from "vue-router";
 import {getProjectIndex, type Project, projects} from "@/modules/utils/projects";
 
@@ -13,6 +13,13 @@ const project: Ref<Project> = ref(projects[projectId])
 function scrollTop() {
   window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})
 }
+
+onMounted(() => {
+  document.querySelector('.arrow-scroll-move').addEventListener('click', (e) => {
+    e.preventDefault();
+    scrollTop();
+  })
+})
 
 
 </script>
@@ -35,8 +42,8 @@ function scrollTop() {
     </div>
     <div class="blog-content row">
       <div class="side-content">
-        <div class="arrow-scroll-move column">
-          <img class="arrow-icon selectable" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" @click="scrollTop()">
+        <div class="arrow-scroll-move column selectable" @click="scrollTop()">
+          <img class="arrow-icon" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" draggable="false">
           <p class="arrow-text">Back</p>
         </div>
       </div>
@@ -131,12 +138,13 @@ function scrollTop() {
 
   .arrow-scroll-move {
     justify-content: center;
-    width: 100%;
+    width: max-content;
+    z-index: 3;
   }
 
   .arrow-scroll-move>.arrow-icon {
-    height: 30%;
-    width: 30%;
+    height: 100%;
+    width: 100%;
   }
 
   .arrow-scroll-move>.arrow-text {
