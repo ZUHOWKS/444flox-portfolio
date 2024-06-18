@@ -9,6 +9,9 @@ const props = defineProps(['arrowTopPosition'])
   const phone = ref(false)
 
   onMounted(() => {
+
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+
     if (window.innerWidth > 1020) {
       if (localStorage.getItem('444flox-reloaded')) {
         // The page was just reloaded. Clear the value from local storage
@@ -21,7 +24,25 @@ const props = defineProps(['arrowTopPosition'])
         location.reload();
       }
     }
-    else phone.value = true
+    else {
+      phone.value = true
+      gsap.timeline({
+        scrollTrigger: {
+          scroller: ".project-container",
+          trigger: '.grid-gallery',
+          start: 'top top',
+          end: '2% top',
+          onLeaveBack: () => {
+            gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
+            gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.1%'})
+          },
+          onEnter: () => {
+            gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
+            gsap.set('.arrow-scroll-move', {position: 'fixed', top: props.arrowTopPosition, duration: 0.25})
+          }
+        }
+      })
+    }
 
 
     addEventListener('resize', () => {
@@ -30,7 +51,6 @@ const props = defineProps(['arrowTopPosition'])
   })
 
   function initScrollTrigger() {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
     const bannerScroll = (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.2
 
