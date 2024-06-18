@@ -35,6 +35,7 @@ html {
   scrollbar-width: thin;
   scrollbar-gutter: stable;
   transition-delay: 0.25s;
+  cursor: url('@/assets/img/mouse/cursor.png'), auto;
 }
 
 *,
@@ -125,6 +126,6 @@ a {
   user-select: none;
 }
 
-.selectable {
-  cursor: pointer;
+a:hover, .selectable {
+  cursor: url('@/assets/img/mouse/pointer.png'), auto;;
 }
