@@ -144,7 +144,7 @@ function scrollTop() {
     text-transform: uppercase;
   }
 
-  @media screen and (max-width: 750px){
+  @media screen and (max-width: 1020px){
     .title-desc>.desc {
       width: 85%;
     }
