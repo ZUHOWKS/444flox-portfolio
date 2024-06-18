@@ -11,15 +11,17 @@ const props = defineProps(['arrowTopPosition'])
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
-  if (localStorage.getItem('444flox-reloaded')) {
-    // The page was just reloaded. Clear the value from local storage
-    // so that it will reload the next time this page is visited.
-    localStorage.removeItem('444flox-reloaded');
-    initScrollTrigger();
-  } else {
-    // Set a flag so that we know not to reload the page twice.
-    localStorage.setItem('444flox-reloaded', '1');
-    location.reload();
+  if (window.innerWidth > 1020) {
+    if (localStorage.getItem('444flox-reloaded')) {
+      // The page was just reloaded. Clear the value from local storage
+      // so that it will reload the next time this page is visited.
+      localStorage.removeItem('444flox-reloaded');
+      initScrollTrigger();
+    } else {
+      // Set a flag so that we know not to reload the page twice.
+      localStorage.setItem('444flox-reloaded', '1');
+      location.reload();
+    }
   }
 
   gsap.timeline({
@@ -40,18 +42,26 @@ onMounted(() => {
   })
 })
 
+function getPostsWidth(): number {
+  return (document.querySelector('.posts') as HTMLElement).offsetWidth
+}
+
+function getPostsHeight(): number {
+  return (document.querySelector('.posts') as HTMLElement).offsetHeight
+}
+
+function getCoversWidth(): number {
+  return (document.querySelector('.covers') as HTMLElement).offsetWidth
+}
+
+function getCoversHeight(): number {
+  return (document.querySelector('.covers') as HTMLElement).offsetHeight
+}
+
 function initScrollTrigger() {
 
-
-
-  const postsWidth = (document.querySelector('.posts') as HTMLElement).offsetWidth
-  const postsHeight = (document.querySelector('.posts') as HTMLElement).offsetHeight
-
-  const coversWidth = (document.querySelector('.covers') as HTMLElement).offsetWidth
-  const coversHeight = (document.querySelector('.covers') as HTMLElement).offsetHeight
-
   gsap.set('.covers', {
-    x: (-coversHeight/2) + 'px',
+    x: () => (-getCoversHeight()/2) + 'px',
   })
 
   gsap.to('.posts', {
@@ -61,9 +71,9 @@ function initScrollTrigger() {
       start: 'bottom 95%',
       pin: true,
       scrub: true,
-      end: () => (postsWidth * 1.5) + 'px',
+      end: () => (getPostsWidth() * 1.5) + 'px',
     },
-    x: (-postsHeight * 1.5) + 'px'
+    x: () => (-getPostsHeight() * 1.5) + 'px'
 
   })
 
@@ -75,11 +85,11 @@ function initScrollTrigger() {
       start: 'bottom 97.5%',
       pin: true,
       scrub: true,
-      end: () => (coversWidth * 1.5) + 'px',
+      end: () => (getCoversWidth() * 1.5) + 'px',
       onLeave: (self) => {
       }
     },
-    x: (coversHeight/2) + 'px'
+    x: () => (getCoversHeight()/2) + 'px'
   })
 }
 </script>
@@ -111,6 +121,10 @@ function initScrollTrigger() {
     object-fit: contain;
   }
 
+  .gallery {
+    width: 100%;
+  }
+
   .gallery>.posts, .gallery>.covers {
     margin-bottom: 4vh;
   }
@@ -132,10 +146,18 @@ function initScrollTrigger() {
   }
 
   @media screen and (max-width: 1020px) {
+    .gallery {
+      width: 75vw;
+    }
+
+    .gallery>.posts, .gallery>.covers {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+
     .merch>.merch-item {
       width: unset;
-      height: max(70vh, 70vw);
-      margin-right: 2vh;
+      height: 50%;
     }
   }
 
@@ -151,7 +173,7 @@ function initScrollTrigger() {
 
   @media screen and (max-width: 1020px) and (orientation: landscape) {
     .posts>.post, .covers>.cover {
-      height: min(57.5vh,57.5vw);
+      height: min(75vh,75vw);
       margin-right: 2vh;
     }
   }
