@@ -54,7 +54,7 @@ function initScrollTrigger() {
   gsap.to('.posts', {
     scrollTrigger: {
       trigger: '.posts',
-      start: 'bottom 97.5%',
+      start: 'bottom 95%',
       pin: true,
       scrub: true,
       end: () => (postsWidth * 1.5) + 'px',
