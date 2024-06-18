@@ -135,6 +135,7 @@ function scrollTop() {
     justify-content: center;
     width: max-content;
     z-index: 3;
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.5));
   }
 
   .arrow-scroll-move>.arrow-icon {
@@ -144,6 +145,7 @@ function scrollTop() {
 
   .arrow-scroll-move>.arrow-text {
     text-transform: uppercase;
+    font-size: min(3.5vh, 3.5vw);
   }
 
   @media screen and (max-width: 1020px){
@@ -189,12 +191,12 @@ function scrollTop() {
     }
 
     .arrow-scroll-move>.arrow-icon {
-      height: 60%;
-      width: 60%;
+      height: 65%;
+      width: 65%;
     }
 
     .arrow-scroll-move>.arrow-text {
-      font-size: min(3.5vh, 3.5vw);
+      font-size: min(3vh, 3vw);
     }
 
   }
