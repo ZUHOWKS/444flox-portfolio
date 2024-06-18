@@ -72,14 +72,14 @@ function initScrollTrigger() {
 <template>
   <section class="gallery">
     <div class="top row">
-      <img class="poster" src="@/assets/img/fallenhero/poster-1.png" alt="poster fallen hero" rel="preload">
+      <img class="poster" src="@/assets/img/fallenhero/poster-1.png" alt="poster fallen hero" rel="preload" draggable="false">
       <div class="list covers column">
-        <img class="cover" src="@/assets/img/fallenhero/cover.png" alt="cover fallen hero" rel="preload">
-        <img class="cover" src="@/assets/img/fallenhero/cover-back.png" alt="cover-back fallen hero" rel="preload">
+        <img class="cover" src="@/assets/img/fallenhero/cover.png" alt="cover fallen hero" rel="preload" draggable="false">
+        <img class="cover" src="@/assets/img/fallenhero/cover-back.png" alt="cover-back fallen hero" rel="preload" draggable="false">
       </div>
     </div>
     <div class="list row">
-      <img class="disk" src="@/assets/img/fallenhero/disk.png" alt="cover-back fallen hero" rel="preload">
+      <img class="disk" src="@/assets/img/fallenhero/disk.png" alt="cover-back fallen hero" rel="preload" draggable="false">
     </div>
   </section>
 

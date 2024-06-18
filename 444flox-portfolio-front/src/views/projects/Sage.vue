@@ -120,34 +120,34 @@ import {onMounted, ref} from "vue";
 <template>
   <div v-if="!phone">
     <section class="banner row flex-centered">
-      <img class="cover-illustration" id="cover-illustration-1" src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
-      <img class="cover-illustration" id="cover-illustration-2" src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
+      <img class="cover-illustration" id="cover-illustration-1" src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload" draggable="false">
+      <img class="cover-illustration" id="cover-illustration-2" src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload" draggable="false">
     </section>
     <section class="gallery row flex-centered">
-      <img id="cover-post-3" class="gallery-img" src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload">
-      <img id="cover-post-1" class="gallery-img" src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload">
-      <img id="cover-post-2" class="gallery-img" src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload">
+      <img id="cover-post-3" class="gallery-img" src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload" draggable="false">
+      <img id="cover-post-1" class="gallery-img" src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload" draggable="false">
+      <img id="cover-post-2" class="gallery-img" src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload" draggable="false">
       <div class="covers row">
-        <img id="cover-front" class="cover" src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload">
-        <img id="cover-back" class="cover" src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
+        <img id="cover-front" class="cover" src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload" draggable="false">
+        <img id="cover-back" class="cover" src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload" draggable="false">
       </div>
     </section>
   </div>
   <section class="grid-gallery column">
     <div class="list row">
-      <img src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload">
-      <img src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload">
+      <img src="@/assets/img/sage/Instagram-01_1.png" alt="cover illustration part 1" rel="preload" draggable="false">
+      <img src="@/assets/img/sage/Instagram-01_2.png" alt="cover illustration part 2" rel="preload" draggable="false">
     </div>
     <div class="list row row-gallery">
-      <img src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload">
-      <img src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/cover.png" alt="cover instagram promotion 2" rel="preload" draggable="false">
+      <img src="@/assets/img/sage/cover_back.png" alt="cover instagram promotion 2" rel="preload" draggable="false">
     </div>
     <div class="list row row-gallery">
-      <img src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload">
-      <img src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/Instagram-02.png" alt="cover instagram promotion 1" rel="preload" draggable="false">
+      <img src="@/assets/img/sage/Instagram-03.png" alt="cover instagram promotion 2" rel="preload" draggable="false">
     </div>
     <div class="list row">
-      <img src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload">
+      <img src="@/assets/img/sage/disk.png" alt="cover instagram promotion 2" rel="preload" draggable="false">
     </div>
   </section>
 
