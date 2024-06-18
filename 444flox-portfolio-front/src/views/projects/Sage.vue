@@ -4,6 +4,8 @@ import {onMounted, ref} from "vue";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
+const props = defineProps(['arrowTopPosition'])
+
   const phone = ref(false)
 
   onMounted(() => {
@@ -29,32 +31,39 @@ import {onMounted, ref} from "vue";
 
   function initScrollTrigger() {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+
+    const bannerScroll = (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.2
+
     gsap.to(".banner", {
       ease: "none",
       scrollTrigger: {
+        scroller: ".project-container",
         trigger: '.banner',
         start: 'center center',
         pin: true,
         scrub: 0.1,
-        end: () => "+=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.2 + "px"
+        end: () => "+=" + bannerScroll + "px"
       },
-      x: "-=" + (document.querySelector('.banner') as HTMLElement).offsetWidth * 1.2 + "px",
+      x: "-=" + bannerScroll + "px",
     })
+
+    const galleryScroll = (document.querySelector('.gallery') as HTMLElement).offsetWidth * 3.5
 
     const galleryAnimation = gsap.timeline({
       scrollTrigger: {
+        scroller: ".project-container",
         trigger: '.gallery',
         start: 'center center',
         pin: true,
         scrub: true,
-        end: () => "+=" + (document.querySelector('.gallery') as HTMLElement).offsetWidth * 3.5 + "px",
+        end: () => "+=" + galleryScroll + "px",
         snap: {
           snapTo: 'labels',
           ease: 'none',
           duration: {min:0.2, max:100},
         },
         onLeave: () => {
-          gsap.to(window, {
+          gsap.to(".project-container", {
             duration: 0.5,
             scrollTo: {
               y: ".grid-gallery",
@@ -64,6 +73,7 @@ import {onMounted, ref} from "vue";
         },
       }
     })
+
 
     galleryAnimation
         .addLabel('start', '<=-1')
@@ -101,13 +111,13 @@ import {onMounted, ref} from "vue";
         .addLabel('secondAppear')
         .to('#cover-post-2', {rotate: 4})
         .to('.gallery-img', {position: 'relative', delay: 0.4})
-        .set('.arrow-scroll-move', {position: 'fixed', top: window.innerHeight + "px"})
+        .set('.arrow-scroll-move', {position: 'absolute', top: galleryScroll + bannerScroll + window.innerHeight + "px"})
         .from('.arrow-icon', {rotate: 0})
         .addLabel('end', '<-=0.5')
         .to('.gallery', {x: "-100%"})
         .addLabel('end')
         .to('.gallery', {x: "-150%", duration: 0.6}, 'arrowAnimation')
-        .to('.arrow-scroll-move', {top: "2.5%", delay: 0.3, duration: 0.3}, 'arrowAnimation')
+        .to('.arrow-scroll-move', {position:'fixed', top: props.arrowTopPosition, delay: 0.3, duration: 0.3}, 'arrowAnimation')
         .to('.arrow-icon', {rotate: 90, delay: 0.45, duration: 0.25}, 'arrowAnimation')
 
 
@@ -169,13 +179,13 @@ img {
 
 .banner>img {
   position: relative;
-  width: max(50vh, 45vw);
+  width: 40%;
 }
 
 .gallery {
   position: relative;
-  height: 90vh;
-  width: 90vw;
+  height: 50vh;
+  width: 100%;
   transform: translateY(max(-70vh, -80vw)) translateX(-5%);
 }
 
@@ -194,12 +204,12 @@ img {
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 50vh;
   z-index: -1;
 }
 
 .covers>img {
-  width: max(55vh, 40vw);
+  height: 100%;
 }
 
 .grid-gallery {
@@ -211,15 +221,19 @@ img {
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
-  margin-bottom: 1%;
+  margin-bottom: 2vh;
 }
 
 .grid-gallery>div>img {
-  height: calc(50vw);
+  height: 60vh;
+}
+
+.grid-gallery>div:nth-child(1)>img {
+  height: calc(61vh);
 }
 
 .grid-gallery>.row-gallery>img {
-  margin-right: 1%;
+  margin-right: 2vh;
 }
 
 .grid-gallery>.row-gallery>img:nth-last-child(1) {
@@ -227,7 +241,12 @@ img {
 }
 
 
-@media screen and (max-width: 750px){
+@media screen and (max-width: 1020px){
+
+  .grid-gallery {
+    width: 75vw;
+  }
+
   .grid-gallery>div>img {
     height: 75vw;
   }

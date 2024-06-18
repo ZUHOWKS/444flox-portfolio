@@ -1,72 +1,154 @@
 <script setup lang="ts">
 
 import {onMounted, type Ref, ref} from "vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {getProjectIndex, type Project, projects} from "@/modules/utils/projects";
+import ProjectsView from "@/views/ProjectsView.vue";
+import gsap from "gsap";
 
 const route = useRoute()
+const router = useRouter()
 const projectId: number = getProjectIndex(route.path.split('/')[1])
 
 const rank: Ref<string> = ref(((projectId + 1) < 10 ? '0' : '') + (projectId + 1))
 const project: Ref<Project> = ref(projects[projectId])
 
 function scrollTop() {
-  window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})
+  (document.querySelector('.project-container') as HTMLElement).scrollTo({ top: 0, left: 0, behavior: 'smooth'})
 }
 
+function hiddenWindow() {
+  gsap.to('.project-window', {
+    scale: 0,
+    duration: 0.25,
+    onComplete: () => {
+      gsap.set('.project-window',{visibility: 'hidden'})
+      router.push('/projects')
+    }
+  })
+}
+
+
+onMounted(() => {
+  if (!localStorage.getItem('444flox-reloaded')) {
+    gsap.set('.project-window', {
+      visibility: 'visible',
+    })
+  }
+})
+
+function arrowTopPosition(): number {
+  const distWindowFromTop = (document.querySelector('.project-window') as HTMLElement).offsetTop
+  const headerHeight = (document.querySelector('.project-window-header') as HTMLElement).offsetHeight
+  return distWindowFromTop + headerHeight + Math.min(window.innerHeight, window.innerWidth) * 0.05
+}
 
 </script>
 
 <template>
-  <div class="container">
-    <div class="project-header row">
-      <div class="rank column">
-        <div>
-          <h1>{{ rank }}</h1>
-          <p>{{ project.year }}</p>
+  <ProjectsView class="projects"/>
+  <div class="project-window column">
+    <div class="project-window-header row">
+      <img class="full-screen-icon selectable" src="@/assets/icons/full-screen.svg" alt="full screen icon" draggable="false" rel="preload" @click="hiddenWindow">
+      <h1 class="window-title">{{ project.title }}</h1>
+    </div>
+    <div class="project-container">
+      <div class="project-header row">
+        <div class="rank column">
+          <div>
+            <h1>{{ rank }}</h1>
+            <p>{{ project.year }}</p>
+          </div>
+
+        </div>
+        <div class="title-desc column">
+          <h1>{{ project.title }}</h1>
+          <p class="desc">{{ project.description }}</p>
         </div>
 
       </div>
-      <div class="title-desc column">
-        <h1>{{ project.title }}</h1>
-        <p class="desc">{{ project.description }}</p>
-      </div>
-
-    </div>
-    <div class="blog-content row">
-      <div class="side-content">
-        <div class="arrow-scroll-move column selectable" @click="scrollTop()">
-          <img class="arrow-icon" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" draggable="false">
-          <p class="arrow-text">Back</p>
+      <div class="blog-content row">
+        <div class="side-content">
+          <div class="arrow-scroll-move column selectable" @click="scrollTop()">
+            <img class="arrow-icon" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" draggable="false">
+            <p class="arrow-text">Back</p>
+          </div>
+        </div>
+        <div class="main-content">
+          <RouterView :arrow-top-position="arrowTopPosition"/>
         </div>
       </div>
-      <div class="main-content">
-        <RouterView/>
-      </div>
     </div>
-
   </div>
-<h1></h1>
+
+
 </template>
 
 <style scoped>
 
-  .container {
+  .projects {
+    position: fixed;
     width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden;
   }
 
-  .container>.project-header {
-    height: 100%;
-    width: 100vw;
+  .project-window {
+    position: fixed;
+    width: calc(70vw + 5vh);
+    height: 75vh;
+    left: 0.75%;
+    top: 10%;
+    padding: calc(1% - 0.5vw);
+    background: var(--header-c);
+    border-radius: 8px;
+    margin-bottom: 5%;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    visibility: hidden;
+  }
+
+  .project-window>.project-window-header {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: var(--background-c);
+    width: calc(100%);
+    height: 14.5%;
+    align-items: center;
+  }
+
+  .project-window-header>.full-screen-icon {
+    justify-self: start;
+    height: 70%;
+    margin: 1.5%;
+  }
+
+  .project-window-header>.window-title {
+    justify-self: center;
+    width: 80%;
+    font-size: calc(1vh + 4.5vw);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .project-container {
+    width: 100%;
+    height: 84.5%;
+    background: var(--background-c);
+    z-index: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-radius: 8px;
+  }
+
+  .project-container>.project-header {
+    width: 100%;
     padding-top: 4%;
     padding-bottom: 12%;
   }
 
-  .container> .blog-content, .project-header {
+  .project-container> .blog-content, .project-header {
     position: relative;
-    width: 100vw;
+    width: 100%;
   }
 
   .blog-content>.side-content, .project-header>.rank {
@@ -132,10 +214,12 @@ function scrollTop() {
   }
 
   .arrow-scroll-move {
+    position: absolute;
+    top: 0.1%;
     justify-content: center;
     width: max-content;
-    z-index: 3;
     filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.5));
+    z-index: 1;
   }
 
   .arrow-scroll-move>.arrow-icon {
@@ -149,6 +233,14 @@ function scrollTop() {
   }
 
   @media screen and (max-width: 1020px){
+
+    .project-window {
+      width: calc(80vw + 5vh);
+      height: 80vh;
+      left: 2%;
+      top: 11%;
+    }
+
     .title-desc>.desc {
       width: 85%;
     }
@@ -171,7 +263,7 @@ function scrollTop() {
     }
 
     .blog-content>.main-content {
-      width: 100vw;
+      width: 77.5%;
       padding-left: 2vw;
     }
 
@@ -198,6 +290,13 @@ function scrollTop() {
     .arrow-scroll-move>.arrow-text {
       font-size: min(3vh, 3vw);
     }
+  }
 
+  @media screen and (max-width: 720px){
+    .project-header h1 {
+      font-size: min(11.5vh, 11.5vw);
+      line-height: min(11.5vh, 11.5vw);
+      text-wrap: wrap;
+    }
   }
 </style>

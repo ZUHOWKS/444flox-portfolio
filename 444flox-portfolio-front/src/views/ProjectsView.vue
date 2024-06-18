@@ -95,7 +95,7 @@ function previousProject() {
 </script>
 
 <template>
-<div class="container column flex-centered">
+<div class="lecteur-container column flex-centered">
   <div class="box column flex-centered">
     <div class="box-header row">
       <img class="full-screen-icon" src="@/assets/icons/full-screen.svg" alt="full screen icon" draggable="false" rel="preload">
@@ -125,7 +125,8 @@ function previousProject() {
 </template>
 
 <style scoped>
-.container {
+.lecteur-container {
+  position: fixed;
   height: 100%;
   width: 100%;
   background-image: url('@/assets/img/background.png');
@@ -134,7 +135,7 @@ function previousProject() {
 }
 
 .box {
-  max-height: 90%;
+  max-height: 80%;
   height: calc(85% - 1vw);
   min-height: 77.5%;
   max-width: 100vh;
@@ -142,7 +143,7 @@ function previousProject() {
   min-width: 43vh;
   background: var(--header-c);
   border-radius: 8px;
-
+  margin-bottom: 5%;
   overflow: hidden;
 
 }

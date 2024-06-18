@@ -6,6 +6,8 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 const phone = ref(false);
 
+const props = defineProps(['arrowTopPosition'])
+
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
@@ -22,16 +24,17 @@ onMounted(() => {
 
   gsap.timeline({
     scrollTrigger: {
+      scroller: ".project-container",
       trigger: '.posts',
       start: 'bottom 97.5%',
       end: '105% bottom',
       onLeaveBack: () => {
         gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'relative', duration: 0.25})
+        gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.1%'})
       },
       onEnter: () => {
         gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'fixed', top:'2%', duration: 0.25})
+        gsap.set('.arrow-scroll-move', {position: 'fixed', top: props.arrowTopPosition, duration: 0.25})
       }
     }
   })
@@ -53,6 +56,7 @@ function initScrollTrigger() {
 
   gsap.to('.posts', {
     scrollTrigger: {
+      scroller: ".project-container",
       trigger: '.posts',
       start: 'bottom 95%',
       pin: true,
@@ -66,6 +70,7 @@ function initScrollTrigger() {
 
   gsap.to('.covers', {
     scrollTrigger: {
+      scroller: ".project-container",
       trigger: '.covers',
       start: 'bottom 97.5%',
       pin: true,
@@ -111,40 +116,42 @@ function initScrollTrigger() {
   }
 
   .posts>.post, .covers>.cover {
-    height: min(85vh,85vw);
-    background: red;
+    height: min(55vh,55vw);
     margin-right: 2vh;
   }
 
   .merch {
+    width: 100%;
     overflow-x: scroll;
+    overflow-y: hidden;
   }
 
   .merch>.merch-item {
-    height: min(100vh,100vw);
+    width: 90%;
     margin-right: 2vh;
   }
 
+  @media screen and (max-width: 1020px) {
+    .merch>.merch-item {
+      width: unset;
+      height: max(70vh, 70vw);
+      margin-right: 2vh;
+    }
+  }
+
+
   @media screen and (max-width: 1020px) and (orientation: portrait) {
     .posts>.post, .covers>.cover {
-      height: max(85vh,85vw);
+      height: max(60vh,60vw);
       margin-right: 2vh;
     }
 
-    .merch>.merch-item {
-      height: max(80vh,80vw);
-      margin-right: 2vh;
-    }
+
   }
 
   @media screen and (max-width: 1020px) and (orientation: landscape) {
     .posts>.post, .covers>.cover {
-      height: min(80vh,80vw);
-      margin-right: 2vh;
-    }
-
-    .merch>.merch-item {
-      height: max(80vh,80vw);
+      height: min(57.5vh,57.5vw);
       margin-right: 2vh;
     }
   }

@@ -4,6 +4,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
+const props = defineProps(['arrowTopPosition'])
+
 const phone = ref(false);
 
 onMounted(() => {
@@ -30,26 +32,33 @@ onMounted(() => {
 
   gsap.timeline({
     scrollTrigger: {
+      scroller: ".project-container",
       trigger: '.disk',
-      start: '1.5% center',
-      end: '15% center',
+      start: '1% top',
+      end: '25% center',
       onEnter: () => gsap.to('.disk', {rotate: 360, duration: 2.5}),
       onEnterBack: () => gsap.to('.disk', {rotate: 0,  duration: 2.5})
     }
   })
 
+
+
   gsap.timeline({
     scrollTrigger: {
+      scroller: ".project-container",
       trigger: '.top',
       start: 'top top',
       end: '1% top',
       onLeaveBack: () => {
         gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'relative', duration: 0.25})
+        gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.1%'})
       },
       onEnter: () => {
         gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'fixed', top:'2%', duration: 0.25})
+        gsap.set('.arrow-scroll-move', {
+          position: 'fixed',
+          top: props.arrowTopPosition,
+        })
       }
     }
   })
@@ -59,6 +68,7 @@ onMounted(() => {
 function initScrollTrigger() {
   gsap.timeline({
     scrollTrigger: {
+      scroller: ".project-container",
       trigger: '.poster',
       start: '-1.5% top',
       pin: true,
@@ -89,14 +99,20 @@ img {
   object-fit: contain;
 }
 
+.gallery>.top {
+  z-index: 1;
+}
+
 .gallery>.top>.poster, .gallery>.top>.covers {
-  width: 50%;
   margin-right: 1%;
+}
+.gallery>.top>.covers {
+  width: 50%;
 }
 
 .gallery>.top>.poster {
-  width: 42.5%;
-  height: 25%;
+  width: 47.5%;
+  height: 26%;
   align-self: start;
 }
 
@@ -107,15 +123,20 @@ img {
 .gallery>.list {
   overflow-x: scroll;
   overflow-y: hidden;
-  max-width: 100vw;
-  justify-content: center;
+  max-width: 100%;
+  justify-content: start;
+
 }
 
 .gallery>.list>img {
-  width: 75vw;
+  height: 100%;
 }
 
 @media screen and (max-width: 1020px) {
+  .gallery {
+    width: 75vw;
+  }
+
   .gallery>.top {
     flex-wrap: wrap;
   }
@@ -134,7 +155,7 @@ img {
   }
 
   .gallery>.top>.covers>.cover {
-    height: 100vw;
+    height: 80vw;
   }
 
   .gallery>.top>.covers>.cover:nth-child(1) {
@@ -145,7 +166,6 @@ img {
   .gallery>.list>img {
     width: 80vh;
     max-width: 80vh;
-    margin-left: 35vh;
 
   }
 }
