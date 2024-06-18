@@ -2,6 +2,7 @@
 import {onMounted, ref} from "vue";
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
   const phone = ref(false)
 
@@ -27,7 +28,7 @@ import {onMounted, ref} from "vue";
   })
 
   function initScrollTrigger() {
-    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
     gsap.to(".banner", {
       ease: "none",
       scrollTrigger: {
@@ -53,11 +54,13 @@ import {onMounted, ref} from "vue";
           duration: {min:0.2, max:100},
         },
         onLeave: () => {
-          const gridGallery = (document.querySelector('.grid-gallery') as HTMLElement)
-          window.scroll({
-            top: gridGallery.offsetHeight * 0.15 + gridGallery.offsetTop,
-            behavior: 'smooth'
-          });
+          gsap.to(window, {
+            duration: 0.5,
+            scrollTo: {
+              y: ".grid-gallery",
+              offsetY: 50
+            }
+          })
         },
       }
     })
@@ -105,7 +108,7 @@ import {onMounted, ref} from "vue";
         .addLabel('end')
         .to('.gallery', {x: "-150%", duration: 0.6}, 'arrowAnimation')
         .to('.arrow-scroll-move', {top: "2.5%", delay: 0.3, duration: 0.3}, 'arrowAnimation')
-        .to('.arrow-icon', {rotate: 90, delay: 0.4, duration: 0.3}, 'arrowAnimation')
+        .to('.arrow-icon', {rotate: 90, delay: 0.45, duration: 0.25}, 'arrowAnimation')
 
 
 
@@ -166,7 +169,7 @@ img {
 
 .banner>img {
   position: relative;
-  width: max(50vh, 40vw);
+  width: max(50vh, 45vw);
 }
 
 .gallery {
