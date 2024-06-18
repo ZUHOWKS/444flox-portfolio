@@ -86,11 +86,6 @@ function arrowTopPosition(): number {
 
 <style scoped>
 
-  .projects {
-    position: fixed;
-    width: 100vw;
-  }
-
   .project-window {
     position: fixed;
     width: calc(70vw + 5vh);
