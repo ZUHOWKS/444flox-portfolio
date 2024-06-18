@@ -98,14 +98,14 @@ import {onMounted, ref} from "vue";
         .addLabel('secondAppear')
         .to('#cover-post-2', {rotate: 4})
         .to('.gallery-img', {position: 'relative', delay: 0.4})
-        .set('.arrow-scroll-move', {position: 'fixed', y: "600%"})
+        .set('.arrow-scroll-move', {position: 'fixed', top: window.innerHeight + "px"})
         .from('.arrow-icon', {rotate: 0})
         .addLabel('end', '<-=0.5')
         .to('.gallery', {x: "-100%"})
         .addLabel('end')
         .to('.gallery', {x: "-150%", duration: 0.6}, 'arrowAnimation')
-        .to('.arrow-scroll-move', {y: "-690%", delay: 0.3, duration: 0.3}, 'arrowAnimation')
-        .to('.arrow-icon', {rotate: 90, delay: 0.3, duration: 0.3}, 'arrowAnimation')
+        .to('.arrow-scroll-move', {top: "2.5%", delay: 0.3, duration: 0.3}, 'arrowAnimation')
+        .to('.arrow-icon', {rotate: 90, delay: 0.4, duration: 0.3}, 'arrowAnimation')
 
 
 
