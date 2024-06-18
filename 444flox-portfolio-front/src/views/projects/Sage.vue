@@ -64,6 +64,7 @@ import {onMounted, ref} from "vue";
 
     galleryAnimation
         .addLabel('start', '<=-1')
+        .set('.covers', {zIndex: 1})
         .from('#cover-front', {x: '-15%', y: "130%", rotate: -23}, "cover-move-0")
         .from('#cover-back', {x: '15%', y: "130%", rotate: 23}, "cover-move-0")
 
@@ -71,19 +72,11 @@ import {onMounted, ref} from "vue";
         .to('#cover-front', {y: "0", duration: 1}, "cover-move-0")
         .to('#cover-back', {y: "0", duration: 1}, "cover-move-0")
 
-        .addLabel('start', '>+=0.1')
-        .from('#cover-front', {x: "0"}, "cover-move-1")
-        .from('#cover-back', {x: "0"}, "cover-move-1")
-        .from('.covers', {zIndex: 1})
-
         .addLabel('coverMove')
         .to('#cover-front', {x: "-55%", scale: 0.95, duration: 1}, "cover-move-1")
         .to('#cover-back', {x: "55%",  scale: 0.95, duration: 1}, "cover-move-1")
-        .to('.covers', {zIndex: -1})
-        .from('#cover-front', {x: "-55%", scale: 0.95}, "cover-move-2")
-        .from('#cover-back', {x: "55%", scale: 0.95}, "cover-move-2")
-
         .addLabel('coverMove', '>')
+        .set('.covers', {zIndex: -1})
         .to('#cover-front', {x: "55%", scale: 0.9, duration: 1}, "cover-move-2")
         .to('#cover-back', {x: "-55%", scale: 0.9, duration: 1}, "cover-move-2")
         .to('.covers', {opacity: 0, delay: 0.75, duration: 0.25}, "cover-move-2")
