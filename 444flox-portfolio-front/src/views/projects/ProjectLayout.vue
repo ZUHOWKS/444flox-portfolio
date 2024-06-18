@@ -5,6 +5,10 @@ import {useRoute, useRouter} from "vue-router";
 import {getProjectIndex, type Project, projects} from "@/modules/utils/projects";
 import ProjectsView from "@/views/ProjectsView.vue";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 const route = useRoute()
 const router = useRouter()
@@ -20,7 +24,7 @@ function scrollTop() {
 function hiddenWindow() {
   gsap.to('.project-window', {
     scale: 0,
-    duration: 0.25,
+    duration: 0.1,
     onComplete: () => {
       gsap.set('.project-window',{visibility: 'hidden'})
       router.push('/projects')
@@ -40,7 +44,30 @@ onMounted(() => {
 function arrowTopPosition(): number {
   const distWindowFromTop = (document.querySelector('.project-window') as HTMLElement).offsetTop
   const headerHeight = (document.querySelector('.project-window-header') as HTMLElement).offsetHeight
+
   return distWindowFromTop + headerHeight + Math.min(window.innerHeight, window.innerWidth) * 0.05
+}
+
+function arrowFollowScroll() {
+  gsap.timeline({
+    scrollTrigger: {
+      scroller: ".project-container",
+      trigger: '.main-content',
+      start: 'top top',
+      end: '1% top',
+      onLeaveBack: () => {
+        gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
+        gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.1%'})
+      },
+      onEnter: () => {
+        gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
+        gsap.set('.arrow-scroll-move', {
+          position: 'fixed',
+          top: arrowTopPosition,
+        })
+      }
+    }
+  })
 }
 
 </script>
@@ -75,7 +102,7 @@ function arrowTopPosition(): number {
           </div>
         </div>
         <div class="main-content">
-          <RouterView :arrow-top-position="arrowTopPosition"/>
+          <RouterView :arrow-top-position="arrowTopPosition" :arrow-follow-scroll="arrowFollowScroll"/>
         </div>
       </div>
     </div>
@@ -189,7 +216,7 @@ function arrowTopPosition(): number {
   }
 
   .title-desc>.desc {
-    width: 47.5%;
+    width: 67.5%;
   }
 
   .title-desc>h1 {

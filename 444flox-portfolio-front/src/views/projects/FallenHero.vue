@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-const props = defineProps(['arrowTopPosition'])
+const props = defineProps(['arrowFollowScroll'])
 
 const phone = ref(false);
 
@@ -41,27 +41,7 @@ onMounted(() => {
     }
   })
 
-
-
-  gsap.timeline({
-    scrollTrigger: {
-      scroller: ".project-container",
-      trigger: '.top',
-      start: 'top top',
-      end: '1% top',
-      onLeaveBack: () => {
-        gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.1%'})
-      },
-      onEnter: () => {
-        gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {
-          position: 'fixed',
-          top: props.arrowTopPosition,
-        })
-      }
-    }
-  })
+  props.arrowFollowScroll()
 
 })
 

@@ -6,7 +6,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 const phone = ref(false);
 
-const props = defineProps(['arrowTopPosition'])
+const props = defineProps(['arrowFollowScroll'])
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
@@ -24,22 +24,7 @@ onMounted(() => {
     }
   }
 
-  gsap.timeline({
-    scrollTrigger: {
-      scroller: ".project-container",
-      trigger: '.posts',
-      start: 'bottom 97.5%',
-      end: '105% bottom',
-      onLeaveBack: () => {
-        gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.1%'})
-      },
-      onEnter: () => {
-        gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'fixed', top: props.arrowTopPosition, duration: 0.25})
-      }
-    }
-  })
+  props.arrowFollowScroll()
 })
 
 function getPostsWidth(): number {
