@@ -54,6 +54,7 @@ function scrollTop() {
   .container {
     width: 100vw;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   .container>.project-header {
@@ -65,6 +66,7 @@ function scrollTop() {
 
   .container> .blog-content, .project-header {
     position: relative;
+    width: 100vw;
   }
 
   .blog-content>.side-content, .project-header>.rank {
@@ -163,12 +165,12 @@ function scrollTop() {
     }
 
     .blog-content>.side-content {
-      margin: 0 1%;
-      margin-right: 2%;
+      padding-right: 5vw;
     }
 
     .blog-content>.main-content {
-      width: 80vw;
+      width: 100vw;
+      padding-left: 2vw;
     }
 
 
@@ -182,9 +184,13 @@ function scrollTop() {
       line-height: min(6vh, 6vw);
     }
 
+    .arrow-scroll-move {
+      margin: 0 5% 0 1%;
+    }
+
     .arrow-scroll-move>.arrow-icon {
-      height: 70%;
-      width: 70%;
+      height: 60%;
+      width: 60%;
     }
 
     .arrow-scroll-move>.arrow-text {
