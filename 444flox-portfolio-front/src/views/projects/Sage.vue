@@ -77,11 +77,7 @@ const props = defineProps(['arrowTopPosition'])
         pin: true,
         scrub: true,
         end: () => "+=" + galleryScroll + "px",
-        snap: {
-          snapTo: 'labels',
-          ease: 'none',
-          duration: {min:0.2, max:100},
-        },
+        fastScrollEnd: true,
         onLeave: () => {
           gsap.to(".project-container", {
             duration: 0.5,
@@ -96,14 +92,12 @@ const props = defineProps(['arrowTopPosition'])
 
 
     galleryAnimation
+        .addLabel('start', '<=-1.5')
+
         .addLabel('start', '<=-1')
         .set('.covers', {zIndex: 1})
-        .from('#cover-front', {x: '-15%', y: "130%", rotate: -23}, "cover-move-0")
-        .from('#cover-back', {x: '15%', y: "130%", rotate: 23}, "cover-move-0")
-
-        .addLabel('start', '<=-0.4')
-        .to('#cover-front', {y: "0", duration: 1}, "cover-move-0")
-        .to('#cover-back', {y: "0", duration: 1}, "cover-move-0")
+        .fromTo('#cover-front', {x: '-15%', y: "130%", rotate: -23}, {x: 0, rotate:0, y: 0, duration: 1}, "cover-move-0")
+        .fromTo('#cover-back', {x: '15%', y: "130%", rotate: 23}, {x:0, rotate:0, y: 0, duration: 1}, "cover-move-0")
 
         .addLabel('coverMove')
         .to('#cover-front', {x: "-55%", scale: 0.95, duration: 1}, "cover-move-1")
@@ -131,13 +125,13 @@ const props = defineProps(['arrowTopPosition'])
         .addLabel('secondAppear')
         .to('#cover-post-2', {rotate: 4})
         .to('.gallery-img', {position: 'relative', delay: 0.4})
-        .set('.arrow-scroll-move', {position: 'absolute', top: galleryScroll + bannerScroll + window.innerHeight + "px"})
+        .set('.arrow-scroll-move', {position: 'fixed', opacity: 0, top: ((document.querySelector('.project-container') as HTMLElement).offsetHeight) + "px"})
         .from('.arrow-icon', {rotate: 0})
         .addLabel('end', '<-=0.5')
         .to('.gallery', {x: "-100%"})
         .addLabel('end')
         .to('.gallery', {x: "-150%", duration: 0.6}, 'arrowAnimation')
-        .to('.arrow-scroll-move', {position:'fixed', top: props.arrowTopPosition, delay: 0.3, duration: 0.3}, 'arrowAnimation')
+        .to('.arrow-scroll-move', {position:'fixed', opacity: 1, top: props.arrowTopPosition, delay: 0.3, duration: 0.3}, 'arrowAnimation')
         .to('.arrow-icon', {rotate: 90, delay: 0.45, duration: 0.25}, 'arrowAnimation')
 
 
