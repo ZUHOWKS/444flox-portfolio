@@ -49,11 +49,10 @@ onMounted(() => {
       },
       onEnter: () => {
         gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'fixed', top:'2.5%', duration: 0.25})
+        gsap.set('.arrow-scroll-move', {position: 'fixed', top:'2%', duration: 0.25})
       }
     }
   })
-
 
 })
 
