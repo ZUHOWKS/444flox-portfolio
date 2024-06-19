@@ -122,7 +122,7 @@ function showLinkArrow() {
 
           <div class="arrow-action arrow-link column selectable">
             <img class="arrow arrow-link-icon" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" draggable="false">
-            <p class="arrow-text">Link</p>
+            <p class="arrow-text arrow-link-text">Link</p>
           </div>
         </div>
         <div class="main-content">
