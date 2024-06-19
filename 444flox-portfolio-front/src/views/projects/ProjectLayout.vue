@@ -19,6 +19,7 @@ const project: Ref<Project> = ref(projects[projectId])
 
 function scrollTop() {
   (document.querySelector('.project-container') as HTMLElement).scrollTo({ top: 0, left: 0, behavior: 'smooth'})
+  resetArrowScroll();
 }
 
 function hiddenWindow() {
@@ -39,6 +40,7 @@ onMounted(() => {
       visibility: 'visible',
     })
 
+    gsap.set('.arrow-link-icon', {rotate: -90});
     gsap.set('.arrow-link', {visibility: 'hidden', top: arrowTopPosition() * 2})
   }
 })
@@ -47,7 +49,12 @@ function arrowTopPosition(): number {
   const distWindowFromTop = (document.querySelector('.project-window') as HTMLElement).offsetTop
   const headerHeight = (document.querySelector('.project-window-header') as HTMLElement).offsetHeight
 
-  return distWindowFromTop + headerHeight + Math.min(window.innerHeight, window.innerWidth) * 0.05
+  return distWindowFromTop + headerHeight + Math.min(window.innerHeight, window.innerWidth) * 0.035
+}
+
+function resetArrowScroll() {
+  gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
+  gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.45%'})
 }
 
 function arrowFollowScroll() {
@@ -57,10 +64,7 @@ function arrowFollowScroll() {
       trigger: '.main-content',
       start: 'top top',
       end: '1% top',
-      onLeaveBack: () => {
-        gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
-        gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.1%'})
-      },
+      onLeaveBack: resetArrowScroll,
       onEnter: () => {
         gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
         gsap.set('.arrow-scroll-move', {
@@ -70,6 +74,19 @@ function arrowFollowScroll() {
       }
     }
   })
+}
+
+function hiddenLinkArrow() {
+  const topPos = arrowTopPosition();
+  gsap.to('.arrow-link', {opacity: 0, top: topPos * 2, visibility: 'hidden', duration: 0.35});
+  gsap.to('.arrow-scroll-move', {opacity: 1, top: topPos, visibility: 'visible', duration: 0.35});
+
+}
+
+function showLinkArrow() {
+  const topPos = arrowTopPosition();
+  gsap.to('.arrow-link', {opacity: 1, top: topPos, visibility: 'visible',  duration: 0.35});
+  gsap.to('.arrow-scroll-move', {opacity: 0, top: topPos * 2, visibility: 'hidden', duration: 0.35});
 }
 
 </script>
@@ -109,7 +126,7 @@ function arrowFollowScroll() {
           </div>
         </div>
         <div class="main-content">
-          <RouterView :arrow-top-position="arrowTopPosition" :arrow-follow-scroll="arrowFollowScroll"/>
+          <RouterView :arrow-top-position="arrowTopPosition" :arrow-follow-scroll="arrowFollowScroll" :show-link-arrow="showLinkArrow" :hidden-link-arrow="hiddenLinkArrow"/>
         </div>
       </div>
     </div>
@@ -244,7 +261,7 @@ function arrowFollowScroll() {
 
   .arrow-action {
     position: absolute;
-    top: 0.1%;
+    top: 0.45%;
     justify-content: center;
     width: max-content;
     filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.5));
