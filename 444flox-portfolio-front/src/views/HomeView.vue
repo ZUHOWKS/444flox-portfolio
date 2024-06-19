@@ -17,7 +17,7 @@
     <div class="desc">
       <p>Bienvenue sur mon portfolio. Pour visiter mes projets, veuillez cliquer/démarrer un morceau. Bonne visite !
         <br><br>
-        Dev: <a href="https://zuhowks.github.io/">Joris VILARDELL</a> - Web Design: 444flox
+        Dev: <a href="https://zuhowks.github.io/">Joris VILARDELL</a> - Design: 444flox
       </p>
     </div>
   </main>
