@@ -14,8 +14,19 @@ const projectsQueued = ref(projects.slice())
 
 const props = defineProps(['closeMainWindow'])
 
+const isDragging = ref(false)
+const mouseXPos = ref(0)
+const mouseYPos = ref(0)
+const draggableWindow: Ref<HTMLElement | null> = ref(null)
+
+
 
 onMounted(() => {
+  if (draggableWindow.value) {
+    draggableWindow.value.style.top = "" + localStorage.getItem('444flox-w-drive-top')
+    draggableWindow.value.style.left = "" + localStorage.getItem('444flox-w-drive-left')
+  }
+
   const listened: string | null = localStorage.getItem('444flox_listened')
   if (!listened) localStorage.setItem('444flox_listened', projectListened.value.coverName)
   else {
@@ -27,6 +38,21 @@ onMounted(() => {
       }
     })
   }
+
+  window.addEventListener("mousemove", (e) => {
+    if (isDragging.value && draggableWindow.value) {
+      const top = (e.clientY - mouseYPos.value + draggableWindow.value.offsetTop) + 'px'
+      const left = (e.clientX - mouseXPos.value + draggableWindow.value.offsetLeft) + 'px'
+
+      draggableWindow.value.style.top = top
+      draggableWindow.value.style.left = left
+
+      localStorage.setItem('444flox-w-drive-top', top);
+      localStorage.setItem('444flox-w-drive-left', left);
+    }
+    mouseXPos.value = e.clientX
+    mouseYPos.value = e.clientY
+  })
 })
 
 function selectInQueue(coverName: string) {
@@ -76,9 +102,6 @@ function nextProject() {
   _projectListened.value = projectListened.value;
   projectListened.value=projectsQueued.value[0];
   projectsQueued.value.push(projectsQueued.value.shift() as Project)
-
-
-
 }
 
 function previousProject() {
@@ -94,12 +117,19 @@ function previousProject() {
   projectsQueued.value = [p].concat(projectsQueued.value)
 }
 
+function windowFirst() {
+  document.querySelectorAll('.box').forEach((boxElem) => {
+    (boxElem as HTMLElement).style.setProperty('z-index', '1');
+  });
+
+  draggableWindow.value?.style.setProperty('z-index', '2');
+}
+
 </script>
 
 <template>
-<div class="flox-desk column flex-centered">
-  <div class="main-window box column flex-centered">
-    <div class="box-header row">
+  <div class="main-window box column flex-centered" ref="draggableWindow" @mousedown="windowFirst">
+    <div @mousedown="isDragging = true" @mouseup="isDragging = false" class="box-header row">
       <img class="close-screen-icon selectable" src="@/assets/icons/close-screen.svg" alt="close screen icon" draggable="false" rel="preload" @click="closeMainWindow">
       <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo" draggable="false" rel="preload">
     </div>
@@ -123,20 +153,12 @@ function previousProject() {
 
     </div>
   </div>
-</div>
 </template>
 
 <style scoped>
-.flox-desk {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  background-image: url('@/assets/img/background.png');
-  background-position: center;
-  background-size: max(175vh, 150vw);
-}
 
 .box {
+  position: fixed;
   max-height: 80%;
   height: calc(85% - 1vw);
   min-height: 77.5%;

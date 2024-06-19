@@ -12,16 +12,7 @@ onMounted(() => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
   if (window.innerWidth > 1020) {
-    if (localStorage.getItem('444flox-reloaded')) {
-      // The page was just reloaded. Clear the value from local storage
-      // so that it will reload the next time this page is visited.
-      localStorage.removeItem('444flox-reloaded');
-      initScrollTrigger();
-    } else {
-      // Set a flag so that we know not to reload the page twice.
-      localStorage.setItem('444flox-reloaded', '1');
-      location.reload();
-    }
+    initScrollTrigger();
   }
   else phone.value = true
 
@@ -52,7 +43,7 @@ function initScrollTrigger() {
       trigger: '.poster',
       start: '-1.5% top',
       pin: true,
-      end: () => ((document.querySelector('.covers') as HTMLElement).offsetHeight - (document.querySelector('.poster') as HTMLElement).offsetHeight - 12) + "px",
+      end: () => ((document.querySelector('.covers') as HTMLElement)?.offsetHeight - (document.querySelector('.poster') as HTMLElement)?.offsetHeight - 12) + "px",
     }
   })
 }

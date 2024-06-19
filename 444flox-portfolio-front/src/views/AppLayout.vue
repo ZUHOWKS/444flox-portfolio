@@ -22,7 +22,7 @@ function closeMainWindow() {
   <header class="row">
     <Navbar/>
   </header>
-  <main>
+  <main class="flox-desk column flex-centered">
     <RouterView :close-main-window="closeMainWindow" />
   </main>
 </template>
@@ -39,6 +39,15 @@ header {
 main {
   width: 100vw;
   height: 92.5vh;
+}
+
+.flox-desk {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-image: url('@/assets/img/background.png');
+  background-position: center;
+  background-size: max(175vh, 150vw);
 }
 
 

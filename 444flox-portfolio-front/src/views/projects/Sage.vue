@@ -1,30 +1,19 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, onUpdated, ref} from "vue";
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-const props = defineProps(['arrowTopPosition'])
+  const props = defineProps(['arrowTopPosition'])
 
   const phone = ref(false)
 
-  onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
-
+  function init() {
     if (window.innerWidth > 1020) {
-      if (localStorage.getItem('444flox-reloaded')) {
-        // The page was just reloaded. Clear the value from local storage
-        // so that it will reload the next time this page is visited.
-        localStorage.removeItem('444flox-reloaded');
-        initScrollTrigger()
-      } else {
-        // Set a flag so that we know not to reload the page twice.
-        localStorage.setItem('444flox-reloaded', '1');
-        location.reload();
-      }
-    }
-    else {
+      initScrollTrigger()
+    } else {
       phone.value = true
       gsap.timeline({
         scrollTrigger: {
@@ -34,7 +23,7 @@ const props = defineProps(['arrowTopPosition'])
           end: '2% top',
           onLeaveBack: () => {
             gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
-            gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.1%'})
+            gsap.set('.arrow-scroll-move', {position: 'absolute', top: '0.1%'})
           },
           onEnter: () => {
             gsap.to('.arrow-icon', {rotate: 90, duration: 0.35})
@@ -48,6 +37,10 @@ const props = defineProps(['arrowTopPosition'])
     addEventListener('resize', () => {
       if (window.innerWidth <= 1020) phone.value = true
     })
+  }
+
+  onMounted(() => {
+    init();
   })
 
   function initScrollTrigger() {

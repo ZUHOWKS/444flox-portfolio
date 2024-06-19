@@ -1,9 +1,10 @@
 <script setup lang="ts">
 
-import {onMounted, type Ref, ref} from "vue";
+import {getCurrentInstance, onMounted, onUpdated, type Ref, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {getProjectIndex, type Project, projects} from "@/modules/utils/projects";
 import ProjectsView from "@/views/ProjectsView.vue";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -12,10 +13,16 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 const route = useRoute()
 const router = useRouter()
-const projectId: number = getProjectIndex(route.path.split('/')[1])
+let projectId: number = getProjectIndex(route.path.split('/')[1])
 
 const rank: Ref<string> = ref(((projectId + 1) < 10 ? '0' : '') + (projectId + 1))
 const project: Ref<Project> = ref(projects[projectId])
+
+const isDragging = ref(false)
+const mouseXPos = ref(0)
+const mouseYPos = ref(0)
+
+const draggableWindow: Ref<HTMLElement | null> = ref(null)
 
 function scrollTop() {
   (document.querySelector('.project-container') as HTMLElement).scrollTo({ top: 0, left: 0, behavior: 'smooth'})
@@ -34,15 +41,59 @@ function closeProjectWindow() {
 }
 
 
-onMounted(() => {
-  if (!localStorage.getItem('444flox-reloaded')) {
-    gsap.set('.project-window', {
-      visibility: 'visible',
-    })
+function setWindowProjectPosition(e: MouseEvent) {
+  if (draggableWindow.value) {
+    const top = (e.clientY - mouseYPos.value + draggableWindow.value.offsetTop) + 'px'
+    const left = (e.clientX - mouseXPos.value + draggableWindow.value.offsetLeft) + 'px'
 
+    draggableWindow.value.style.top = top
+    draggableWindow.value.style.left = left
+
+    localStorage.setItem('444flox-w-project-top', top);
+    localStorage.setItem('444flox-w-project-left', left);
+
+
+    if ((document.querySelector('.project-container') as HTMLElement).scrollTop > (document.querySelector('.project-header') as HTMLElement).offsetHeight) {
+      gsap.set('.arrow-scroll-move', {
+        top: arrowTopPosition,
+      })
+    } else resetArrowScroll()
+
+
+  }
+}
+
+onMounted(() => {
+  if (draggableWindow.value) {
+    draggableWindow.value.style.top = "" + localStorage.getItem('444flox-w-project-top')
+    draggableWindow.value.style.left = "" + localStorage.getItem('444flox-w-project-left')
+  }
+  
+  if (localStorage.getItem('444flox-reloaded')) {
+    // The page was just reloaded. Clear the value from local storage
+    // so that it will reload the next time this page is visited.
+    localStorage.removeItem('444flox-reloaded');
     gsap.set('.arrow-link-icon', {rotate: -90});
     gsap.set('.arrow-link', {visibility: 'hidden', top: arrowTopPosition() * 2})
+
+    window.addEventListener("mousemove", (e) => {
+      if (isDragging.value) {
+        setWindowProjectPosition(e)
+      }
+
+      mouseXPos.value = e.clientX
+      mouseYPos.value = e.clientY
+    })
+  } else {
+    // Set a flag so that we know not to reload the page twice.
+    localStorage.setItem('444flox-reloaded', '1');
+    getCurrentInstance()?.proxy?.$forceUpdate()
   }
+
+})
+
+onUpdated(() => {
+  location.reload();
 })
 
 function arrowTopPosition(): number {
@@ -93,8 +144,8 @@ function showLinkArrow() {
 
 <template>
   <ProjectsView class="projects"/>
-  <div class="project-window column">
-    <div class="project-window-header row">
+  <div class="project-window box column" ref="draggableWindow" @mousedown="draggableWindow?.style.setProperty('z-index', '2')">
+    <div class="project-window-header row" @mousedown="isDragging = true" @mouseup="isDragging = false">
       <img class="close-screen-icon selectable" src="@/assets/icons/close-screen.svg" alt="close screen icon" draggable="false" rel="preload" @click="closeProjectWindow">
       <h1 class="window-title">{{ project.title }}</h1>
     </div>
@@ -150,7 +201,6 @@ function showLinkArrow() {
     align-items: center;
     justify-content: space-between;
     z-index: 1;
-    visibility: hidden;
   }
 
   .project-window>.project-window-header {
