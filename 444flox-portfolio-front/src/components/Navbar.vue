@@ -62,4 +62,17 @@ nav>a:hover {
     margin: 0 calc(1.25vw + 0.5vh);
   }
 }
+
+@media screen and (max-width: 420px) {
+
+  .logo {
+    height: calc(5vw);
+    margin: 0 2vw 0 1vw;
+  }
+
+  nav>a {
+    font-size: calc(4.75vw);
+    margin: 0 calc(1.15vw);
+  }
+}
 </style>
