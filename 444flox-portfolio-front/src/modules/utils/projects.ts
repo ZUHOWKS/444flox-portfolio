@@ -58,9 +58,8 @@ export const projects: Project[] = [
         coverName: 'posters',
         author: '444flox',
         category: 'visual creation',
-        description: "“Pendant l'année 2024, ma deuxième année en design numérique, j'ai eu l'opportunité " +
-            "de réaliser plusieurs projets de dispositifs numériques pour divers commanditaires. Parmi eux, " +
-            "l'agence Fréquences Écoles, l'événement Super Demain, ainsi que le Musée de Bourgoin-Jallieu pour leur exposition \"Carnet de Bal\".",
+        description: "“En 2024, j'ai eu l'occasion d'explorer divers sujets à travers la création de nombreux posters. " +
+            "Cela m'a permis de travailler sur mes compétences en photo-manipulation et en impression, en utilisant différents formats.”",
         year: '2024',
     },
     {

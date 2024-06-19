@@ -3,7 +3,7 @@ import gsap from "gsap";
 
 const props = defineProps(['closeMainWindow'])
 
-const email='florent.btl@gmail.com'
+const email='florent.btlt@gmail.com'
 
 function copyMail() {
   navigator.clipboard.writeText(email)
@@ -31,7 +31,7 @@ function copyMail() {
     </div>
     <div class="box-content column flex-centered">
       <h1>Instagram: <a href="https://www.instagram.com/444flox/" target="_blank">444Flox</a></h1>
-      <h1>Mail: <a @click="copyMail">florent.btl@gmail.com</a></h1>
+      <h1>Mail: <a @click="copyMail">florent.btlt@gmail.com</a></h1>
       <h1>Twitter: <a href="https://x.com/444flox" target="_blank">444Flox</a></h1>
       <p class="info-message">Copied !</p>
     </div>
