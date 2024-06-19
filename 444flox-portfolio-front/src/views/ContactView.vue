@@ -30,9 +30,9 @@ function copyMail() {
       <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo" draggable="false" rel="preload">
     </div>
     <div class="box-content column flex-centered">
-      <h1>Instagram: <a href="https://www.instagram.com/444flox/">444Flox</a></h1>
+      <h1>Instagram: <a href="https://www.instagram.com/444flox/" target="_blank">444Flox</a></h1>
       <h1>Mail: <a @click="copyMail">florent.btl@gmail.com</a></h1>
-      <h1>Twitter: <a href="https://x.com/444flox">444Flox</a></h1>
+      <h1>Twitter: <a href="https://x.com/444flox" target="_blank">444Flox</a></h1>
       <p class="info-message">Copied !</p>
     </div>
 
