@@ -67,16 +67,16 @@ export const projects: Project[] = [
         coverName: 'gen',
         author: '444flox',
         category: 'ui/ux',
-        description: "“L’objectif de l’application est de simplifier et d’enrichir" +
-            "l’expérience de découverte musicale pour les amateurs" +
-            "de rap. En éliminant la nécessité de passer des" +
-            "heures à rechercher manuellement de nouveaux artistes," +
-            "l’application offre une solution pratique, efficace" +
-            "et personnalisée pour élargir votre bibliothèque" +
-            "musicale hip-hop underground." +
-            "\n" +
-            "Avec GEN, plongez dans l’univers diversifié du rap et" +
-            "découvrez des talents émergents qui correspondent" +
+        description: "“L’objectif de l’application est de simplifier et d’enrichir " +
+            "l’expérience de découverte musicale pour les amateurs " +
+            "de rap. En éliminant la nécessité de passer des " +
+            "heures à rechercher manuellement de nouveaux artistes, " +
+            "l’application offre une solution pratique, efficace " +
+            "et personnalisée pour élargir votre bibliothèque " +
+            "musicale hip-hop underground. " +
+            "\n\n" +
+            "Avec GEN, plongez dans l’univers diversifié du rap et " +
+            "découvrez des talents émergents qui correspondent " +
             "parfaitement à vos préférences musicales.”",
         year: '2024',
     },

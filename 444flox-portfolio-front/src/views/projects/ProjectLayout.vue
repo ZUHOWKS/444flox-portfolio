@@ -241,6 +241,7 @@ function showLinkArrow() {
 
   .title-desc>.desc {
     width: 67.5%;
+    white-space: pre-wrap;
   }
 
   .title-desc>h1 {
