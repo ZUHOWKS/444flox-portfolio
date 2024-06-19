@@ -69,4 +69,10 @@ onMounted(() => {
       width: 70vw;
     }
   }
+
+  @media screen and (max-width: 680px) {
+    .gallery {
+      width: calc(75vw - 2vh);
+    }
+  }
 </style>
