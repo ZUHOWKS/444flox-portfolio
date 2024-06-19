@@ -218,12 +218,12 @@ function showLinkArrow() {
     font-weight: bold;
     text-transform: uppercase;
     font-family: vcr-osd-neue, serif;
-    font-size: min(10vh, 10vw);
-    line-height: min(8vh, 8vw);
+    font-size: min(9vh, 9vw);
+    line-height: min(7vh, 7vw);
   }
 
   .project-header>.rank {
-    width: 12.5%;
+    width: 15%;
   }
 
   .project-header p {
@@ -244,8 +244,8 @@ function showLinkArrow() {
   }
 
   .title-desc>h1 {
-    font-size: min(16vh, 16vw);
-    line-height: min(13vh, 13vw);
+    font-size: min(11vh, 11vw);
+    line-height: min(9vh, 9vw);
   }
 
   .blog-content>.side-content {
@@ -306,8 +306,8 @@ function showLinkArrow() {
     }
 
     .project-header h1 {
-      font-size: min(15vh, 15vw);
-      line-height: min(13vh, 13vw);
+      font-size: min(10vh, 10vw);
+      line-height: min(8vh, 8vw);
     }
 
     .project-header>.title-desc {
@@ -329,13 +329,13 @@ function showLinkArrow() {
 
 
     .project-header p {
-      font-size: min(4vh, 4vw);
-      line-height: min(4vh, 4vw);
+      font-size: min(3vh, 3vw);
+      line-height: min(3vh, 3vw);
     }
 
     .project-header .desc {
-      font-size: min(6vh, 6vw);
-      line-height: min(6vh, 6vw);
+      font-size: min(4vh, 4vw);
+      line-height: min(4vh, 4vw);
     }
 
     .arrow-action {
