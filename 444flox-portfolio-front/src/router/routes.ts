@@ -10,6 +10,10 @@ import Sage from "@/views/projects/Sage.vue";
 import Dispositifs from "@/views/projects/Dispositifs.vue";
 import FallenHero from "@/views/projects/FallenHero.vue";
 import ProjectLayout from "@/views/projects/ProjectLayout.vue";
+import ContactView from "@/views/ContactView.vue";
+import CurriculumView from "@/views/CurriculumView.vue";
+import ShopView from "@/views/ShopView.vue";
+import DeskView from '@/views/projects/DeskView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,13 +24,33 @@ const router = createRouter({
       component: SpawnView
     },
     {
-      path: '/projects',
+      path: '/desk',
       component: AppLayout,
       children: [
         {
           path: '',
+          name: 'Desk',
+          component: DeskView
+        },
+        {
+          path: '/projects',
           name: 'Projects',
           component: ProjectsView
+        },
+        {
+          path: '/shop',
+          name: 'Shop',
+          component: ShopView
+        },
+        {
+          path: '/contact',
+          name: 'Contact',
+          component: ContactView
+        },
+        {
+          path: '/curriculum',
+          name: 'CV',
+          component: CurriculumView
         },
         {
           path: '/:name',

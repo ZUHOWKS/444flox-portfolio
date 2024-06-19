@@ -12,6 +12,8 @@ const projectListened: Ref<Project> = ref(projects[0])
 const _projectListened: Ref<Project> = ref(projects[0])
 const projectsQueued = ref(projects.slice())
 
+const props = defineProps(['closeMainWindow'])
+
 
 onMounted(() => {
   const listened: string | null = localStorage.getItem('444flox_listened')
@@ -95,10 +97,10 @@ function previousProject() {
 </script>
 
 <template>
-<div class="lecteur-container column flex-centered">
-  <div class="box column flex-centered">
+<div class="flox-desk column flex-centered">
+  <div class="main-window box column flex-centered">
     <div class="box-header row">
-      <img class="full-screen-icon" src="@/assets/icons/full-screen.svg" alt="full screen icon" draggable="false" rel="preload">
+      <img class="close-screen-icon selectable" src="@/assets/icons/close-screen.svg" alt="close screen icon" draggable="false" rel="preload" @click="closeMainWindow">
       <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo" draggable="false" rel="preload">
     </div>
     <div class="box-content row flex-centered">
@@ -125,7 +127,7 @@ function previousProject() {
 </template>
 
 <style scoped>
-.lecteur-container {
+.flox-desk {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -159,7 +161,7 @@ function previousProject() {
   align-items: center;
 }
 
-.box-header>.full-screen-icon {
+.box-header>.close-screen-icon {
   justify-self: start;
   height: 70%;
   margin: 1.5%;

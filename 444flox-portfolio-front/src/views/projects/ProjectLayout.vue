@@ -22,7 +22,7 @@ function scrollTop() {
   resetArrowScroll();
 }
 
-function hiddenWindow() {
+function closeProjectWindow() {
   gsap.to('.project-window', {
     scale: 0,
     duration: 0.1,
@@ -95,7 +95,7 @@ function showLinkArrow() {
   <ProjectsView class="projects"/>
   <div class="project-window column">
     <div class="project-window-header row">
-      <img class="full-screen-icon selectable" src="@/assets/icons/full-screen.svg" alt="full screen icon" draggable="false" rel="preload" @click="hiddenWindow">
+      <img class="close-screen-icon selectable" src="@/assets/icons/close-screen.svg" alt="close screen icon" draggable="false" rel="preload" @click="closeProjectWindow">
       <h1 class="window-title">{{ project.title }}</h1>
     </div>
     <div class="project-container">
@@ -162,7 +162,7 @@ function showLinkArrow() {
     align-items: center;
   }
 
-  .project-window-header>.full-screen-icon {
+  .project-window-header>.close-screen-icon {
     justify-self: start;
     height: 70%;
     margin: 1.5%;

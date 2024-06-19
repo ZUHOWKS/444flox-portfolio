@@ -6,9 +6,9 @@
   <RouterLink to="/" class="logo"><img src="@/assets/img/logo/444flox-logo-black.svg" alt="444flox logo" draggable="false" rel="preload"></RouterLink>
   <nav class="row flex-centered">
     <RouterLink to="/projects" id="home">home</RouterLink>
-    <RouterLink to="/projects" id="shop">shop</RouterLink>
-    <RouterLink to="/projects" id="contact">contact</RouterLink>
-    <RouterLink to="/projects" id="cv">cv</RouterLink>
+    <RouterLink to="/shop" id="shop">shop</RouterLink>
+    <RouterLink to="/contact" id="contact">contact</RouterLink>
+    <RouterLink to="/curriculum" id="cv">cv</RouterLink>
   </nav>
 </template>
 

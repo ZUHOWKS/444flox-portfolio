@@ -1,6 +1,21 @@
 <script setup lang="ts">
 
 import Navbar from "@/components/Navbar.vue";
+import gsap from "gsap";
+import {useRouter} from "vue-router";
+
+const router = useRouter()
+
+function closeMainWindow() {
+  gsap.to('.main-window', {
+    scale: 0,
+    duration: 0.1,
+    onComplete: () => {
+      router.push('/desk')
+    }
+  })
+}
+
 </script>
 
 <template>
@@ -8,7 +23,7 @@ import Navbar from "@/components/Navbar.vue";
     <Navbar/>
   </header>
   <main>
-    <RouterView/>
+    <RouterView :close-main-window="closeMainWindow" />
   </main>
 </template>
 
