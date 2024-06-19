@@ -1,5 +1,17 @@
 <script setup lang="ts">
 const props = defineProps(['closeMainWindow'])
+
+function download(url:string, filename:string) {
+  fetch(url)
+      .then(response => response.blob())
+      .then(blob => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+      })
+      .catch(console.error);
+}
 </script>
 
 <template>
@@ -9,8 +21,8 @@ const props = defineProps(['closeMainWindow'])
       <img class="close-screen-icon selectable" src="@/assets/icons/close-screen.svg" alt="close screen icon" draggable="false" rel="preload" @click="closeMainWindow">
       <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo" draggable="false" rel="preload">
     </div>
-    <div class="box-content row flex-centered">
-
+    <div class="box-content row list">
+      <img class="curriculum selectable" src="/cv.png" alt="curriculum vitae 444flox logo" draggable="false" rel="preload" @click="download('./cv.pdf', 'florent-boutelet-cv.pdf')">
     </div>
   </div>
 </div>
@@ -66,6 +78,8 @@ const props = defineProps(['closeMainWindow'])
 .box>.box-content {
   height: calc(100% - calc(18% - 14px));
   width: 100%;
+  overflow: scroll;
+  justify-content: center;
 }
 
 .box>.box-content h1,h2,h3,a,p {
@@ -75,6 +89,18 @@ const props = defineProps(['closeMainWindow'])
 
 .box>.box-content img {
   filter: drop-shadow(0px 2px 6px rgba(0,0,0, 0.45));
+}
+
+.box-content>.curriculum {
+  object-fit: contain;
+  height: 100vh;
+}
+
+@media screen and (max-width: 800px) {
+  .box-content>.curriculum {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 </style>
