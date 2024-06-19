@@ -10,6 +10,17 @@
   onMounted(() => {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+    if (localStorage.getItem('444flox-reloaded')) {
+      // The page was just reloaded. Clear the value from local storage
+      // so that it will reload the next time this page is visited.
+      localStorage.removeItem('444flox-reloaded');
+
+    } else {
+      // Set a flag so that we know not to reload the page twice.
+      localStorage.setItem('444flox-reloaded', '1');
+      location.reload();
+    }
+
     (document.querySelector('.arrow-link') as HTMLElement).addEventListener('click', () => window.location.href = 'https://heyzine.com/flip-book/fd14dba361.html')
 
     props.arrowFollowScroll();
