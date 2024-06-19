@@ -1,11 +1,45 @@
 <script setup lang="ts">
 
   import {onMounted} from "vue";
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-  const props = defineProps(['arrowFollowScroll'])
+  const props = defineProps(['arrowFollowScroll', 'arrowTopPosition'])
+
+  function hiddenLinkArrow() {
+    gsap.to('.arrow-link', {opacity: 0, top: props.arrowTopPosition() * 2, visibility: 'hidden', duration: 0.35});
+    gsap.to('.arrow-scroll-move', {opacity: 1, top: props.arrowTopPosition(), visibility: 'visible', duration: 0.35});
+
+  }
+
+  function showLinkArrow() {
+    gsap.to('.arrow-link', {opacity: 1, top: props.arrowTopPosition(), visibility: 'visible',  duration: 0.35});
+    gsap.to('.arrow-scroll-move', {opacity: 0, top: props.arrowTopPosition() * 2, visibility: 'hidden', duration: 0.35});
+  }
 
   onMounted(() => {
-    props.arrowFollowScroll()
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    gsap.set('.arrow-link-icon', {rotate: -90});
+
+    (document.querySelector('.arrow-link') as HTMLElement).addEventListener('click', () => window.location.href = 'https://heyzine.com/flip-book/fd14dba361.html')
+
+    props.arrowFollowScroll();
+    gsap.timeline({
+      scrollTrigger: {
+        scroller: ".project-container",
+        trigger: '.covers',
+        start: '-15% top',
+        end: () => ((document.querySelector('.covers') as HTMLElement).offsetHeight * 0.8) + "px",
+        onLeaveBack: hiddenLinkArrow,
+        onLeave: hiddenLinkArrow,
+        onEnter: showLinkArrow,
+        onEnterBack: showLinkArrow,
+      }
+    })
+
+
   })
 </script>
 
@@ -136,7 +170,6 @@
 
     .posts>.row>img {
       width: 100vw;
-
     }
   }
 

@@ -38,6 +38,8 @@ onMounted(() => {
     gsap.set('.project-window', {
       visibility: 'visible',
     })
+
+    gsap.set('.arrow-link', {visibility: 'hidden', top: arrowTopPosition() * 2})
   }
 })
 
@@ -96,9 +98,14 @@ function arrowFollowScroll() {
       </div>
       <div class="blog-content row">
         <div class="side-content">
-          <div class="arrow-scroll-move column selectable" @click="scrollTop()">
-            <img class="arrow-icon" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" draggable="false">
+          <div class="arrow-action arrow-scroll-move column selectable" @click="scrollTop()">
+            <img class="arrow arrow-icon" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" draggable="false">
             <p class="arrow-text">Back</p>
+          </div>
+
+          <div class="arrow-action arrow-link column selectable">
+            <img class="arrow arrow-link-icon" src="@/assets/icons/arrow.svg" alt="arrow scroll" rel="preload" draggable="false">
+            <p class="arrow-text">Link</p>
           </div>
         </div>
         <div class="main-content">
@@ -235,7 +242,7 @@ function arrowFollowScroll() {
     min-height: 100vh;
   }
 
-  .arrow-scroll-move {
+  .arrow-action {
     position: absolute;
     top: 0.1%;
     justify-content: center;
@@ -244,12 +251,26 @@ function arrowFollowScroll() {
     z-index: 1;
   }
 
-  .arrow-scroll-move>.arrow-icon {
+  .arrow-link {
+    position: fixed;
+    visibility: hidden;
+  }
+
+  .arrow-link>.arrow-link-icon {
+    rotate: -90deg;
+    transition: .35s;
+  }
+
+  .arrow-link:hover>.arrow-link-icon {
+    rotate: -180deg;
+  }
+
+  .arrow-action>.arrow {
     height: 100%;
     width: 100%;
   }
 
-  .arrow-scroll-move>.arrow-text {
+  .arrow-action>.arrow-text {
     text-transform: uppercase;
     font-size: min(3.5vh, 3.5vw);
   }
@@ -300,16 +321,16 @@ function arrowFollowScroll() {
       line-height: min(6vh, 6vw);
     }
 
-    .arrow-scroll-move {
+    .arrow-action {
       margin: 0 5% 0 1%;
     }
 
-    .arrow-scroll-move>.arrow-icon {
+    .arrow-action>.arrow {
       height: 65%;
       width: 65%;
     }
 
-    .arrow-scroll-move>.arrow-text {
+    .arrow-action>.arrow-text {
       font-size: min(3vh, 3vw);
     }
   }
