@@ -1,10 +1,43 @@
 <script setup lang="ts">
 import {onMounted} from "vue";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-const props = defineProps(['arrowFollowScroll'])
+const props = defineProps(['arrowFollowScroll', 'arrowTopPosition', 'hiddenLinkArrow', 'showLinkArrow'])
 
 onMounted(() => {
-  props.arrowFollowScroll()
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+  if (localStorage.getItem('444flox-reloaded')) {
+    // The page was just reloaded. Clear the value from local storage
+    // so that it will reload the next time this page is visited.
+    localStorage.removeItem('444flox-reloaded');
+
+  } else {
+    // Set a flag so that we know not to reload the page twice.
+    localStorage.setItem('444flox-reloaded', '1');
+    location.reload();
+  }
+
+  (document.querySelector('.arrow-link') as HTMLElement).addEventListener('click', () => window.location.href = 'https://www.figma.com/proto/fvewfNrVGc507ACE51tEjW/gen-app?page-id=0%3A1&node-id=1-2&viewport=-707%2C1335%2C1.15&t=iLImeat4Kp8yeuna-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A2')
+
+  props.arrowFollowScroll();
+  gsap.timeline({
+    scrollTrigger: {
+      scroller: ".project-container",
+      trigger: '.view-app',
+      start: '-15% top',
+      end: () => ((document.querySelector('.view-app') as HTMLElement).offsetHeight * 0.8) + "px",
+      onLeaveBack: props.hiddenLinkArrow,
+      onLeave: props.hiddenLinkArrow,
+      onEnter: props.showLinkArrow,
+      onEnterBack: props.showLinkArrow,
+    }
+  });
+
+  (document.querySelector('.arrow-link-text') as HTMLElement).innerText = 'app'
+
 })
 </script>
 
@@ -13,7 +46,7 @@ onMounted(() => {
     <div class="row list">
       <img src="@/assets/img/gen/mockup-app.png" alt="mockup app gen" rel="preload" draggable="false">
     </div>
-    <div class="row list">
+    <div class="view-app row list">
       <img src="@/assets/img/gen/mockup-phone.png" alt="mockup phone gen" rel="preload" draggable="false">
       <img src="@/assets/img/gen/gen-logo.png" alt="gen logo gen" rel="preload" draggable="false">
     </div>
