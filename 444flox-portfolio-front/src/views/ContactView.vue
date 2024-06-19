@@ -1,5 +1,25 @@
 <script setup lang="ts">
+import gsap from "gsap";
+
 const props = defineProps(['closeMainWindow'])
+
+const email='florent.btl@gmail.com'
+
+function copyMail() {
+  navigator.clipboard.writeText(email)
+  const showInfoMessage = gsap.timeline();
+
+  showInfoMessage.addLabel('start')
+      .set('.info-message', {
+        opacity: 1,
+      })
+      .addLabel('end')
+      .set('.info-message', {
+        opacity: 0,
+        delay: 5,
+      });
+}
+
 </script>
 
 <template>
@@ -9,11 +29,16 @@ const props = defineProps(['closeMainWindow'])
       <img class="close-screen-icon selectable" src="@/assets/icons/close-screen.svg" alt="close screen icon" draggable="false" rel="preload" @click="closeMainWindow">
       <img class="logo" src="@/assets/img/logo/444flox-logo-white.svg" alt="444flox logo" draggable="false" rel="preload">
     </div>
-    <div class="box-content row flex-centered">
-
+    <div class="box-content column flex-centered">
+      <h1>Instagram: <a href="https://www.instagram.com/444flox/">444Flox</a></h1>
+      <h1>Mail: <a @click="copyMail">florent.btl@gmail.com</a></h1>
+      <h1>Twitter: <a href="https://x.com/444flox">444Flox</a></h1>
+      <p class="info-message">Copied !</p>
     </div>
+
   </div>
 </div>
+
 </template>
 
 <style scoped>
@@ -76,5 +101,35 @@ const props = defineProps(['closeMainWindow'])
 .box>.box-content img {
   filter: drop-shadow(0px 2px 6px rgba(0,0,0, 0.45));
 }
+
+.box-content> h1,a {
+  font-size: calc(2vw + 1vh);
+  font-weight: 800;
+  text-transform: lowercase;
+  text-align: center;
+}
+
+.box-content>h1 {
+  margin: 2.5% 0;
+  text-transform: uppercase;
+}
+
+.box-content>h1>a:hover {
+  text-decoration: underline;
+}
+
+.info-message {
+  position: absolute;
+  bottom: 15%;
+  opacity: 0;
+  font-size: min(2vh, 2.5vw);
+}
+
+@media screen and (max-width: 1120px) {
+  .box-content> h1,a {
+    font-size: max(3.25vh, 4vw);
+  }
+}
+
 
 </style>
