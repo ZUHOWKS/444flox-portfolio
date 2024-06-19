@@ -24,8 +24,9 @@
         onEnter: props.showLinkArrow,
         onEnterBack: props.showLinkArrow,
       }
-    })
+    });
 
+    (document.querySelector('.arrow-link-text') as HTMLElement).innerText = 'book'
 
   })
 </script>
