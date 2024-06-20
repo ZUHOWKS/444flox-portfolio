@@ -25,8 +25,21 @@ const mouseYPos = ref(0)
 const draggableWindow: Ref<HTMLElement | null> = ref(null)
 
 function scrollTop() {
-  (document.querySelector('.project-container') as HTMLElement).scrollTo({ top: 0, left: 0, behavior: 'smooth'})
-  resetArrowScroll();
+  const projectContainer = (document.querySelector('.project-container') as HTMLElement);
+  projectContainer.scrollTo({ top: 0, left: 0, behavior: 'smooth',});
+
+  let test: number = 0;
+  const checkIfScrollToIsFinished = setInterval(() => {
+    if (projectContainer.scrollTop < (document.querySelector('.project-header') as HTMLElement).offsetHeight) {
+      resetArrowScroll();
+      return clearInterval(checkIfScrollToIsFinished);
+    } else if (test > 120 ) {
+      return clearInterval(checkIfScrollToIsFinished);
+    }
+    test++
+  }, 25);
+
+
 }
 
 function closeProjectWindow() {
@@ -105,14 +118,14 @@ function arrowTopPosition(): number {
 
 function resetArrowScroll() {
   gsap.to('.arrow-icon', {rotate: 0, duration: 0.35})
-  gsap.set('.arrow-scroll-move', {position: 'absolute', top:'0.45%'})
+  gsap.to('.arrow-scroll-move', {position: 'absolute', opacity: 1, top:'0.45%', duration: 0.35})
 }
 
-function arrowFollowScroll() {
+function arrowFollowScroll(trigger: string | null) {
   gsap.timeline({
     scrollTrigger: {
       scroller: ".project-container",
-      trigger: '.main-content',
+      trigger: trigger ? trigger : '.main-content',
       start: 'top top',
       end: '1% top',
       onLeaveBack: resetArrowScroll,
